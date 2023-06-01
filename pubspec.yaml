@@ -1,5 +1,5 @@
 name: hyounsik_info
-description: A new Flutter project.
+description: hyounsik.info
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  provider: ^6.0.5
+  rxdart: ^0.27.7
 
 dev_dependencies:
   flutter_test:
