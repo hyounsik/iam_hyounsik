@@ -11,11 +11,13 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  final desktopHome = const DesktopHomePage();
+  final mobileHome = const MobileHomePage();
   Widget getHome(Size size) {
     if (size.width > 600) {
-      return DesktopHomePage();
+      return desktopHome;
     } else {
-      return MobileHomePage();
+      return mobileHome;
     }
   }
 
