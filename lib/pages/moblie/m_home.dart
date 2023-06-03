@@ -12,7 +12,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
   @override
   Widget build(BuildContext context) {
     String cloud = "https://image.hyounsik.info/cloud_3.png";
-    String sun = "https://image.hyounsik.info/hend_phone.png";
+    String me = "https://image.hyounsik.info/hyounsik.png";
     String testvalley1 =
         "https://image.hyounsik.info/testvalley/testvalley_1.jpeg";
     String testvalleyIcon =
@@ -23,6 +23,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
     final ScrollController scrollController1 = ScrollController();
     final ScrollController scrollController2 = ScrollController();
     final ScrollController scrollController3 = ScrollController();
+    final ScrollController scrollController4 = ScrollController();
     return Scaffold(
       body: HSContent(
         backgroundDatas: [
@@ -42,10 +43,14 @@ class _MobileHomePageState extends State<MobileHomePage> {
             scrollController1,
           ),
           HSBackgroundWidgetData(
-            Image.network(sun), scrollController2,
-            sizeRatio: 1.1,
-            scale: 0.6,
-            alignment: Alignment.bottomRight,
+            Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: Image.network(me),
+            ),
+            scrollController2,
+            sizeRatio: 1.6,
+            scale: 0.5,
+            alignment: Alignment.center,
             // padding: const EdgeInsets.only(right: 48),
           ),
           HSBackgroundWidgetData(Image.network(cloud), scrollController3,
@@ -54,6 +59,14 @@ class _MobileHomePageState extends State<MobileHomePage> {
               alignment: Alignment.bottomRight,
               padding: const EdgeInsets.only(right: 48),
               reverse: true),
+          HSBackgroundWidgetData(
+              Transform.flip(flipX: true, child: Image.network(cloud)),
+              scrollController4,
+              sizeRatio: 1.4,
+              scale: 1.2,
+              alignment: Alignment.bottomLeft,
+              padding: const EdgeInsets.only(left: 48, bottom: 56),
+              reverse: false),
         ],
         foregroundContent: Center(
             child: Container(
@@ -63,90 +76,33 @@ class _MobileHomePageState extends State<MobileHomePage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const _Header(),
+                const Header(),
                 ...List.generate(
                     5,
-                    (index) => Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                if (index == 0) {
-                                  locationBloc
-                                      .setLocation(HSLocation.testvalley);
-                                } else {
-                                  locationBloc.setLocation(HSLocation.effy);
-                                }
-                              },
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                    minHeight: mediaSize.height - 100,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white70,
-                                      boxShadow: boxShadow,
-                                      borderRadius: borderRadius24),
-                                  child: Column(
-                                    children: [
-                                      Opacity(
-                                        opacity: 0.8,
-                                        child: Container(
-                                          width: constraints.maxWidth,
-                                          height: constraints.maxWidth,
-                                          decoration: BoxDecoration(
-                                              borderRadius: borderRadius24,
-                                              image: DecorationImage(
-                                                  image: NetworkImage(index == 0
-                                                      ? testvalleyIcon
-                                                      : effyIcon))),
-                                          // child: Image.network(
-                                          //   effyIcon,
-                                          //   width: 500,
-                                          // ),
-                                        ),
-                                      ),
-                                      Text('셜라셜라')
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 40,
-                            )
-                          ],
+                    (index) => SimpleCard(
+                          onTap: () {
+                            if (index == 0) {
+                              locationBloc.location.add(HSLocation.testvalley);
+                            } else {
+                              locationBloc.location.add(HSLocation.effy);
+                            }
+                          },
+                          imgUrls: index == 0 ? [testvalleyIcon] : [effyIcon],
+                          dateString: '2022.11 ~ 현재',
+                          title: 'TestValley',
+                          subTitle: 'AOS/IOS (flutter) 앱 개발',
+                          imageWidth: constraints.maxWidth - 24,
+                          imageHeight: constraints.maxWidth - 24,
+                          color: Colors.black54,
+                          textColor: Colors.white70,
+                          titleStyle: headerTextStyle72,
                         )).toList(),
-                SizedBox(
-                  height: 200,
-                )
+                Footer()
               ],
             );
           }),
         )),
       ),
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Size mediaSize = MediaQuery.of(context).size;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        SizedBox(
-          height: mediaSize.height * 0.2,
-        ),
-        Text(
-          '이현식',
-          style: headerTextStyle1,
-        )
-      ],
     );
   }
 }

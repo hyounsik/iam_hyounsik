@@ -15,7 +15,7 @@ class _MainAppState extends State<MainApp> {
   final mobileHome = const MobileHomePage();
 
   Widget getHome(Size size) {
-    if (size.width > 600) {
+    if (size.width > 800) {
       return desktopHome;
     } else {
       return mobileHome;
@@ -70,7 +70,17 @@ class _MainAppState extends State<MainApp> {
                       switchInCurve: Curves.easeInOut,
                       switchOutCurve: Curves.easeInOut,
                       duration: const Duration(milliseconds: 500),
-                      child: getPage(location, screenSize));
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                            decoration: BoxDecoration(boxShadow: boxShadow2),
+                            constraints: screenSize.width > 800
+                                ? BoxConstraints(
+                                    maxWidth: 1400,
+                                  )
+                                : null,
+                            child: getPage(location, screenSize)),
+                      ));
                 }),
           );
         }),

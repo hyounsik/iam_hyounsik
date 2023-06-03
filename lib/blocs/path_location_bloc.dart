@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hyounsik_info/essential.dart';
 
 enum HSLocation {

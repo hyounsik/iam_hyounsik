@@ -21,7 +21,7 @@ class _TestValleyPageState extends State<TestValleyPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          locationBloc.setLocation(HSLocation.aboutMe);
+          locationBloc.location.add(HSLocation.aboutMe);
         },
         child: Container(
           width: 88,
@@ -103,7 +103,7 @@ class _Header extends StatelessWidget {
         ),
         Text(
           '이현식',
-          style: headerTextStyle1,
+          style: headerTextStyle88,
         )
       ],
     );
