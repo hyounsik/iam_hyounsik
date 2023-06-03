@@ -12,8 +12,6 @@ class HSForeground extends StatelessWidget {
         return SingleChildScrollView(
           controller: controller,
           child: Container(
-            height: constraints.maxHeight * 1.6,
-            width: constraints.maxWidth,
             child: child ?? Placeholder(),
           ),
         );

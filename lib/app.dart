@@ -13,12 +13,34 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   final desktopHome = const DesktopHomePage();
   final mobileHome = const MobileHomePage();
+
   Widget getHome(Size size) {
     if (size.width > 600) {
       return desktopHome;
     } else {
       return mobileHome;
     }
+  }
+
+  Widget getPage(HSLocation location, Size size) {
+    Widget? page;
+
+    switch (location) {
+      case HSLocation.aboutMe:
+        page = getHome(size);
+        break;
+      case HSLocation.testvalley:
+        page = TestValleyPage();
+        break;
+      case HSLocation.effy:
+        page = EffyPage();
+        break;
+      default:
+        // page = getHome(size);
+        break;
+    }
+
+    return page ?? Placeholder();
   }
 
   @override
@@ -33,17 +55,23 @@ class _MainAppState extends State<MainApp> {
       child: MaterialApp(
         home: LayoutBuilder(builder: (context, constraints) {
           MediaQueryData mediaQueryData = MediaQuery.of(context);
+          PathLocationBloc locationBloc = context.read<PathLocationBloc>();
           Size screenSize = mediaQueryData.size;
           return Scaffold(
-            body: AnimatedSwitcher(
-              transitionBuilder: (child, animation) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-              switchInCurve: Curves.bounceInOut,
-              switchOutCurve: Curves.bounceInOut,
-              duration: const Duration(milliseconds: 500),
-              child: getHome(screenSize),
-            ),
+            body: StreamBuilder<HSLocation>(
+                stream: locationBloc.location.stream,
+                initialData: locationBloc.currentLocation,
+                builder: (context, snapshot) {
+                  HSLocation location = snapshot.data!;
+                  return AnimatedSwitcher(
+                      transitionBuilder: (child, animation) {
+                        return ScaleTransition(scale: animation, child: child);
+                      },
+                      switchInCurve: Curves.easeInOut,
+                      switchOutCurve: Curves.easeInOut,
+                      duration: const Duration(milliseconds: 500),
+                      child: getPage(location, screenSize));
+                }),
           );
         }),
       ),

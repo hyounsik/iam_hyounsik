@@ -1,48 +1,55 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_network/image_network.dart';
+
+class HSBackgroundWidgetData {
+  final Widget child;
+  final ScrollController scrollController;
+  final bool reverse;
+  final Axis scrollDirection;
+  final AlignmentGeometry alignment;
+  final double sizeRatio;
+  final EdgeInsets padding;
+  final double scale;
+  HSBackgroundWidgetData(this.child, this.scrollController,
+      {this.reverse = false,
+      this.sizeRatio = 1.0,
+      this.scale = 1.0,
+      this.alignment = Alignment.center,
+      this.padding = EdgeInsets.zero,
+      this.scrollDirection = Axis.vertical});
+}
 
 class HSBackground extends StatelessWidget {
-  final ScrollController controller;
-  final String? image;
+  final HSBackgroundWidgetData widgetData;
 
-  const HSBackground({required this.controller, this.image, super.key});
+  const HSBackground({required this.widgetData, super.key});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        double height = constraints.maxHeight * 1.1;
-        double width = constraints.maxWidth;
+        bool isVertical = widgetData.scrollDirection == Axis.vertical;
+        double height =
+            constraints.maxHeight * (isVertical ? widgetData.sizeRatio : 1.0);
+        double width =
+            constraints.maxWidth * (!isVertical ? widgetData.sizeRatio : 1.0);
 
         return ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
-            controller: controller,
+            controller: widgetData.scrollController,
+            reverse: widgetData.reverse,
+            scrollDirection: widgetData.scrollDirection,
             child: Container(
-              height: height,
-              width: width,
-              child: image != null
-                  ?
-                  // kDebugMode
-                  //     ? ImageNetwork(
-                  //         image: image!, height: height, width: width)
-                  // : Image.network(
-                  //     image!,
-                  //     fit: BoxFit.cover,
-                  //   )
-                  // ImageNetwork(
-                  //     image: image!,
-                  //     height: height,
-                  //     width: width,
-                  //     fitWeb: BoxFitWeb.fill,
-                  //   )
-                  Image.network(
-                      image!,
-                      fit: BoxFit.fill,
-                    )
-                  : Placeholder(),
-            ),
+                height: height,
+                width: width,
+                padding: widgetData.padding,
+                child: Align(
+                  alignment: widgetData.alignment,
+                  child: Transform.scale(
+                    scale: widgetData.scale,
+                    child: widgetData.child,
+                  ),
+                )),
           ),
         );
       },
