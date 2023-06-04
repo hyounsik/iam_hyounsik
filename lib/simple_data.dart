@@ -103,29 +103,25 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.effy.value: {
-    'id': '${HSLocation.testvalley.value}_id',
-    'backgroundImages': [
-      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
-    ],
+    'id': '${HSLocation.effy.value}_id',
+    'backgroundImages': ['https://image.hyounsik.info/effy/effy_icon.png'],
     'backgroundColors': [0x00000000, 0xFFFFFFFF],
-    'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+    'titleImage': 'https://image.hyounsik.info/effy/effy_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
     'jobs': [
       {
-        'image': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+        'image': 'https://image.hyounsik.info/effy/effy_icon.png',
         'title': 'AOS/IOS (Flutter) 앱 개발',
         'jobDetails': ['상세 작업 내용']
       }
     ]
   },
   HSLocation.remon.value: {
-    'id': '${HSLocation.testvalley.value}_id',
-    'backgroundImages': [
-      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
-    ],
+    'id': '${HSLocation.remon.value}_id',
+    'backgroundImages': ['https://image.hyounsik.info/remon_logo2.png'],
     'backgroundColors': [0x00000000, 0xFFFFFFFF],
-    'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+    'titleImage': 'https://image.hyounsik.info/remon_logo2.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
     'jobs': [
@@ -137,7 +133,7 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.rainbow.value: {
-    'id': '${HSLocation.testvalley.value}_id',
+    'id': '${HSLocation.rainbow.value}_id',
     'backgroundImages': [
       'https://image.hyounsik.info/testvalley/testvalley_icon.png'
     ],
@@ -154,7 +150,7 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.sentence.value: {
-    'id': '${HSLocation.testvalley.value}_id',
+    'id': '${HSLocation.sentence.value}_id',
     'backgroundImages': [
       'https://image.hyounsik.info/testvalley/testvalley_icon.png'
     ],
@@ -171,7 +167,7 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.flk.value: {
-    'id': '${HSLocation.testvalley.value}_id',
+    'id': '${HSLocation.flk.value}_id',
     'backgroundImages': [
       'https://image.hyounsik.info/testvalley/testvalley_icon.png'
     ],
@@ -188,7 +184,7 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.aboutMe.value: {
-    'id': '${HSLocation.testvalley.value}_id',
+    'id': '${HSLocation.aboutMe.value}_id',
     'backgroundImages': [
       'https://image.hyounsik.info/testvalley/testvalley_icon.png'
     ],
@@ -206,11 +202,11 @@ final Map<String, dynamic> detailMapDatas = {
   }
 };
 
-DetailCardData detailCardData(HSLocation location) {
-  return DetailCardData.fromMap(detailMapDatas[location.value]);
+DetailPageData detailCardData(HSLocation location) {
+  return DetailPageData.fromMap(detailMapDatas[location.value]);
 }
 
-class DetailCardData {
+class DetailPageData {
   final String id;
   final String titleImage;
   final List<String> backgroundImages;
@@ -218,10 +214,14 @@ class DetailCardData {
   final String title;
   final String subTtile;
   final List<DetailJobData> jobs;
-  const DetailCardData(this.titleImage, this.title, this.subTtile, this.jobs,
+  const DetailPageData(this.titleImage, this.title, this.subTtile, this.jobs,
       this.id, this.backgroundImages, this.backgroundColors);
 
-  factory DetailCardData.fromMap(Map<String, dynamic> data) {
+  factory DetailPageData.fromLocation(HSLocation location) {
+    return DetailPageData.fromMap(detailMapDatas[location.value]);
+  }
+
+  factory DetailPageData.fromMap(Map<String, dynamic> data) {
     List<DetailJobData> jobs = [];
     if (data['jobs'] != null && data['jobs'] is List<Map<String, dynamic>>) {
       final list = data['jobs'] as List<Map<String, dynamic>>;
@@ -234,7 +234,7 @@ class DetailCardData {
       final list = data['backgroundColors'] as List<int>;
       colors = list.map((e) => Color(e)).toList();
     }
-    return DetailCardData(
+    return DetailPageData(
       data['titleImage'],
       data['title'] ?? 'Title',
       data['subTtile'] ?? 'Sub Title',

@@ -74,7 +74,9 @@ class _MobileHomePageState extends State<MobileHomePage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Header(),
+                const Header(
+                  image: 'https://image.hyounsik.info/hyounsik_logo.png',
+                ),
                 ...simpleCardDatas.map((item) {
                   return SimpleCard(
                     onTap: () {

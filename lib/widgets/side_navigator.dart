@@ -15,7 +15,7 @@ class SideNavigator extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: GestureDetector(
             onTap: () {
-              if (locationBloc.currentLocation != location) {
+              if (locationBloc.currentLocation != e) {
                 locationBloc.location.add(e);
               }
             },

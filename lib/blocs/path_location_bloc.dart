@@ -40,7 +40,7 @@ extension HSLocationEX on HSLocation {
 
 class PathLocationBloc extends Disposable {
   final BehaviorSubject<HSLocation> location =
-      BehaviorSubject<HSLocation>.seeded(HSLocation.home);
+      BehaviorSubject<HSLocation>.seeded(HSLocation.testvalley);
 
   HSLocation get currentLocation => location.value;
   Function get setLocation => location.add;

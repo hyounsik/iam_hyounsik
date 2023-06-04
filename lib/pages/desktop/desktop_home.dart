@@ -24,28 +24,31 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
       body: HSContent(
         backgroundDatas: [
           HSBackgroundWidgetData(
-            Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.lightBlue.shade100,
-                  Colors.lightBlue.shade50,
-                  Colors.white,
-                ],
-              )),
-            ),
-            scrollController1,
-          ),
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.lightBlue.shade100,
+                    Colors.lightBlue.shade50,
+                    Colors.white,
+                  ],
+                )),
+              ),
+              scrollController1,
+              sizeRatio: 1.05),
           HSBackgroundWidgetData(
             Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Image.network(me),
+              padding: EdgeInsets.only(top: 80, right: mediaSize.width / 8),
+              child: Image.network(
+                me,
+                width: mediaSize.width / 5 > 300 ? mediaSize.width / 5 : 300,
+              ),
             ),
             scrollController2,
             sizeRatio: 1.15,
-            scale: 0.5,
+            // scale: 0.5,
             alignment: Alignment.centerRight,
           ),
           HSBackgroundWidgetData(Image.network(cloud), scrollController3,
@@ -63,7 +66,9 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Header(),
+                const Header(
+                  image: 'https://image.hyounsik.info/hyounsik_logo.png',
+                ),
                 ...simpleCardDatas.map((item) {
                   return SimpleCard(
                     onTap: () {

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
 import 'package:hyounsik_info/essential.dart';
 
 class MainApp extends StatefulWidget {
@@ -13,45 +11,6 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   final desktopHome = const DesktopHomePage();
   final mobileHome = const MobileHomePage();
-
-  Widget getHome(Size size) {
-    if (size.width > 800) {
-      return desktopHome;
-    } else {
-      return mobileHome;
-    }
-  }
-
-  Widget getPage(HSLocation location, Size size) {
-    Widget? page;
-
-    switch (location) {
-      case HSLocation.home:
-        page = getHome(size);
-        break;
-      case HSLocation.testvalley:
-        page = TestValleyPage();
-        break;
-      case HSLocation.effy:
-        page = EffyPage();
-        break;
-      default:
-        // page = getHome(size);
-        break;
-    }
-
-    return Align(
-        key: ValueKey(location.value),
-        alignment: Alignment.center,
-        child: Container(
-            decoration: BoxDecoration(boxShadow: boxShadow2),
-            constraints: size.width > 800
-                ? const BoxConstraints(
-                    maxWidth: 1400,
-                  )
-                : null,
-            child: page ?? Placeholder()));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +39,38 @@ class _MainAppState extends State<MainApp> {
                       switchInCurve: Curves.easeInOut,
                       switchOutCurve: Curves.easeInOut,
                       duration: const Duration(milliseconds: 500),
-                      child: getPage(location, screenSize));
+                      child: _Page(
+                          key: ValueKey(location.value),
+                          location: location,
+                          size: screenSize));
                 }),
           );
         }),
       ),
     );
+  }
+}
+
+class _Page extends StatelessWidget {
+  final HSLocation location;
+  final Size size;
+  const _Page({super.key, required this.location, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+        alignment: Alignment.center,
+        child: Container(
+            decoration: BoxDecoration(boxShadow: boxShadow2),
+            constraints: size.width > 600
+                ? const BoxConstraints(
+                    maxWidth: 1400,
+                  )
+                : null,
+            child: location == HSLocation.home
+                ? size.width < 600
+                    ? const MobileHomePage()
+                    : const DesktopHomePage()
+                : DetailPage(location)));
   }
 }
