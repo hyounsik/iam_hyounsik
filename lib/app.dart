@@ -26,7 +26,7 @@ class _MainAppState extends State<MainApp> {
     Widget? page;
 
     switch (location) {
-      case HSLocation.aboutMe:
+      case HSLocation.home:
         page = getHome(size);
         break;
       case HSLocation.testvalley:
@@ -40,7 +40,17 @@ class _MainAppState extends State<MainApp> {
         break;
     }
 
-    return page ?? Placeholder();
+    return Align(
+        key: ValueKey(location.value),
+        alignment: Alignment.center,
+        child: Container(
+            decoration: BoxDecoration(boxShadow: boxShadow2),
+            constraints: size.width > 800
+                ? const BoxConstraints(
+                    maxWidth: 1400,
+                  )
+                : null,
+            child: page ?? Placeholder()));
   }
 
   @override
@@ -70,17 +80,7 @@ class _MainAppState extends State<MainApp> {
                       switchInCurve: Curves.easeInOut,
                       switchOutCurve: Curves.easeInOut,
                       duration: const Duration(milliseconds: 500),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                            decoration: BoxDecoration(boxShadow: boxShadow2),
-                            constraints: screenSize.width > 800
-                                ? BoxConstraints(
-                                    maxWidth: 1400,
-                                  )
-                                : null,
-                            child: getPage(location, screenSize)),
-                      ));
+                      child: getPage(location, screenSize));
                 }),
           );
         }),

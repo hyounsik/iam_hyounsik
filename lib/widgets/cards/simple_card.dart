@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hyounsik_info/essential.dart';
 
@@ -52,8 +53,8 @@ class SimpleCard extends StatelessWidget {
                                 padding: const EdgeInsets.all(16).add(
                                     const EdgeInsets.symmetric(horizontal: 8)),
                                 child: Container(
-                                  width: 300,
-                                  height: 300,
+                                  width: imageWidth,
+                                  height: imageHeight,
                                   decoration: BoxDecoration(
                                     borderRadius: borderRadius24,
                                     boxShadow: boxShadow3,
@@ -69,51 +70,58 @@ class SimpleCard extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      dateString ?? '0000.00 ~ 0000.00',
-                      style: subHeaderTextStyle32.apply(color: textColor),
-                    ),
-                    Text(
-                      title ?? 'Title',
-                      style: (titleStyle ?? headerTextStyle88)
-                          .apply(color: textColor),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      subTitle ?? 'sub title',
-                      style: headerTextStyle32.apply(color: textColor),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        onTap();
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '자세히',
-                            style: linkTextStyle24,
-                          ),
-                          const Icon(
-                            Icons.keyboard_arrow_right,
-                            color: Colors.lightBlue,
-                            size: 32,
-                          )
-                        ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                        dateString ?? '0000.00 ~ 0000.00',
+                        maxLines: 1,
+                        style: subHeaderTextStyle32.apply(color: textColor),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                  ],
+                      AutoSizeText(
+                        title ?? 'Title',
+                        maxLines: 1,
+                        style: (titleStyle ?? headerTextStyle88)
+                            .apply(color: textColor),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      AutoSizeText(
+                        subTitle ?? 'sub title',
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        style: headerTextStyle32.apply(color: textColor),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          onTap();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '자세히',
+                              style: linkTextStyle24,
+                            ),
+                            const Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Colors.lightBlue,
+                              size: 32,
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

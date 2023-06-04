@@ -7,7 +7,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     Size mediaSize = MediaQuery.of(context).size;
 
-    String hand_phone = "https://image.hyounsik.info/hand_phone.png";
+    String hand_phone = "https://image.hyounsik.info/hyounsik_logo.png";
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

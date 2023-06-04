@@ -20,7 +20,7 @@ class _EffyPageState extends State<EffyPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          locationBloc.location.add(HSLocation.aboutMe);
+          locationBloc.location.add(HSLocation.home);
         },
         child: Container(
           width: 88,

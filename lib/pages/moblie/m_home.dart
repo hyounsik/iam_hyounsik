@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyounsik_info/essential.dart';
+import 'package:hyounsik_info/simple_data.dart';
 
 class MobileHomePage extends StatefulWidget {
   const MobileHomePage({super.key});
@@ -9,6 +10,10 @@ class MobileHomePage extends StatefulWidget {
 }
 
 class _MobileHomePageState extends State<MobileHomePage> {
+  final ScrollController scrollController1 = ScrollController();
+  final ScrollController scrollController2 = ScrollController();
+  final ScrollController scrollController3 = ScrollController();
+  final ScrollController scrollController4 = ScrollController();
   @override
   Widget build(BuildContext context) {
     String cloud = "https://image.hyounsik.info/cloud_3.png";
@@ -20,10 +25,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
     String effyIcon = "https://image.hyounsik.info/effy/effy_icon.png";
     Size mediaSize = MediaQuery.of(context).size;
     PathLocationBloc locationBloc = context.read<PathLocationBloc>();
-    final ScrollController scrollController1 = ScrollController();
-    final ScrollController scrollController2 = ScrollController();
-    final ScrollController scrollController3 = ScrollController();
-    final ScrollController scrollController4 = ScrollController();
+
     return Scaffold(
       body: HSContent(
         backgroundDatas: [
@@ -71,32 +73,27 @@ class _MobileHomePageState extends State<MobileHomePage> {
         foregroundContent: Center(
             child: Container(
           width: mediaSize.width,
-          padding: const EdgeInsets.symmetric(horizontal: 48),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: LayoutBuilder(builder: (context, constraints) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Header(),
-                ...List.generate(
-                    5,
-                    (index) => SimpleCard(
-                          onTap: () {
-                            if (index == 0) {
-                              locationBloc.location.add(HSLocation.testvalley);
-                            } else {
-                              locationBloc.location.add(HSLocation.effy);
-                            }
-                          },
-                          imgUrls: index == 0 ? [testvalleyIcon] : [effyIcon],
-                          dateString: '2022.11 ~ 현재',
-                          title: 'TestValley',
-                          subTitle: 'AOS/IOS (flutter) 앱 개발',
-                          imageWidth: constraints.maxWidth - 24,
-                          imageHeight: constraints.maxWidth - 24,
-                          color: Colors.black54,
-                          textColor: Colors.white70,
-                          titleStyle: headerTextStyle72,
-                        )).toList(),
+                ...simpleCardDatas.map((item) {
+                  return SimpleCard(
+                    onTap: () {
+                      locationBloc.location.add(item.location);
+                    },
+                    imgUrls: item.images.sublist(0, 1),
+                    dateString: item.dateString,
+                    title: item.title,
+                    subTitle: item.subTtile,
+                    imageWidth: constraints.maxWidth - 48,
+                    imageHeight: constraints.maxWidth - 48,
+                    color: Colors.black54,
+                    textColor: Colors.white70,
+                  );
+                }).toList(),
                 Footer()
               ],
             );
