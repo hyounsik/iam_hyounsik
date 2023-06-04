@@ -17,14 +17,9 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   Widget build(BuildContext context) {
     String cloud = "https://image.hyounsik.info/cloud_3.png";
     String me = 'https://image.hyounsik.info/hyounsik.png';
-    String testvalley1 =
-        "https://image.hyounsik.info/testvalley/testvalley_1.jpeg";
-    String testvalleyIcon =
-        "https://image.hyounsik.info/testvalley/testvalley_icon.png";
-    String effyIcon = "https://image.hyounsik.info/effy/effy_icon.png";
+
     Size mediaSize = MediaQuery.of(context).size;
     PathLocationBloc locationBloc = context.read<PathLocationBloc>();
-    DetailCardData da = detailCardData(HSLocation.testvalley);
     return Scaffold(
       body: HSContent(
         backgroundDatas: [

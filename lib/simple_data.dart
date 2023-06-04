@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'blocs/path_location_bloc.dart';
 
 final List<Map<String, dynamic>> simpleMapDatas = [
@@ -84,6 +86,11 @@ class SimpleCardData {
 
 final Map<String, dynamic> detailMapDatas = {
   HSLocation.testvalley.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -96,6 +103,11 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.effy.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -108,6 +120,11 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.remon.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -120,6 +137,11 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.rainbow.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -132,6 +154,11 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.sentence.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -144,6 +171,11 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.flk.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -156,6 +188,11 @@ final Map<String, dynamic> detailMapDatas = {
     ]
   },
   HSLocation.aboutMe.value: {
+    'id': '${HSLocation.testvalley.value}_id',
+    'backgroundImages': [
+      'https://image.hyounsik.info/testvalley/testvalley_icon.png'
+    ],
+    'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
@@ -174,11 +211,15 @@ DetailCardData detailCardData(HSLocation location) {
 }
 
 class DetailCardData {
+  final String id;
   final String titleImage;
+  final List<String> backgroundImages;
+  final List<Color> backgroundColors;
   final String title;
   final String subTtile;
   final List<DetailJobData> jobs;
-  const DetailCardData(this.titleImage, this.title, this.subTtile, this.jobs);
+  const DetailCardData(this.titleImage, this.title, this.subTtile, this.jobs,
+      this.id, this.backgroundImages, this.backgroundColors);
 
   factory DetailCardData.fromMap(Map<String, dynamic> data) {
     List<DetailJobData> jobs = [];
@@ -186,11 +227,21 @@ class DetailCardData {
       final list = data['jobs'] as List<Map<String, dynamic>>;
       jobs = list.map((e) => DetailJobData.fromMap(e)).toList();
     }
+
+    List<Color> colors = [];
+    if (data['backgroundColors'] != null &&
+        data['backgroundColors'] is List<int>) {
+      final list = data['backgroundColors'] as List<int>;
+      colors = list.map((e) => Color(e)).toList();
+    }
     return DetailCardData(
       data['titleImage'],
       data['title'] ?? 'Title',
       data['subTtile'] ?? 'Sub Title',
       jobs,
+      data['id'] ?? 'unknown',
+      data['backgroundImages'] ?? [],
+      colors,
     );
   }
 }
