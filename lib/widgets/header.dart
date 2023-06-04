@@ -56,11 +56,8 @@ class DetailHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(
-            height: 32,
-          ),
           Opacity(
-            opacity: 0.9,
+            opacity: 0.99,
             child: Container(
               height: height,
               width: width,
@@ -73,7 +70,7 @@ class DetailHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 32,
+            height: 16,
           ),
         ],
       );

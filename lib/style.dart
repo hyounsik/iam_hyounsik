@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 
-TextStyle subHeaderTextStyle24 = const TextStyle(fontSize: 24);
-TextStyle subHeaderTextStyle32 = const TextStyle(fontSize: 32);
-TextStyle headerTextStyle32 = const TextStyle(fontSize: 32);
-TextStyle headerTextStyle48 = const TextStyle(fontSize: 48);
-TextStyle headerTextStyle56 = const TextStyle(fontSize: 56);
-TextStyle headerTextStyle64 = const TextStyle(fontSize: 64);
-TextStyle headerTextStyle72 = const TextStyle(fontSize: 72);
-TextStyle headerTextStyle88 = const TextStyle(fontSize: 88);
+const mobileWidth = 600;
+
+TextStyle subHeaderTextStyle24 =
+    const TextStyle(fontSize: 24, fontWeight: FontWeight.w500);
+TextStyle subHeaderTextStyle32 =
+    const TextStyle(fontSize: 32, fontWeight: FontWeight.w500);
+TextStyle headerTextStyle32 =
+    const TextStyle(fontSize: 32, fontWeight: FontWeight.w500);
+TextStyle headerTextStyle48 =
+    const TextStyle(fontSize: 48, fontWeight: FontWeight.w600);
+TextStyle headerTextStyle56 =
+    const TextStyle(fontSize: 56, fontWeight: FontWeight.w600);
+TextStyle headerTextStyle64 =
+    const TextStyle(fontSize: 64, fontWeight: FontWeight.w600);
+TextStyle headerTextStyle72 =
+    const TextStyle(fontSize: 72, fontWeight: FontWeight.w600);
+TextStyle headerTextStyle88 =
+    const TextStyle(fontSize: 88, fontWeight: FontWeight.w600);
+
+TextStyle sideNaviTextStyle = const TextStyle(
+    fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87);
+TextStyle sideNaviTextStyleM = const TextStyle(
+    fontSize: 10, fontWeight: FontWeight.bold, color: Colors.black87);
 
 TextStyle linkTextStyle24 =
     const TextStyle(fontSize: 24, color: Colors.lightBlue);

@@ -44,27 +44,33 @@ class SimpleCard extends StatelessWidget {
               children: [
                 Opacity(
                   opacity: 0.93,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...(imgUrls ?? [])
-                          .map((imgUrl) => Padding(
-                                padding: const EdgeInsets.all(16).add(
-                                    const EdgeInsets.symmetric(horizontal: 8)),
-                                child: Container(
-                                  width: imageWidth,
-                                  height: imageHeight,
-                                  decoration: BoxDecoration(
-                                    borderRadius: borderRadius24,
-                                    boxShadow: boxShadow3,
-                                    image: DecorationImage(
-                                        image: NetworkImage(imgUrl)),
-                                  ),
-                                ),
-                              ))
-                          .toList()
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...(imgUrls ?? [])
+                              .map((imgUrl) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24),
+                                    child: Container(
+                                      width: imageWidth,
+                                      height: imageHeight,
+                                      decoration: BoxDecoration(
+                                        borderRadius: borderRadius24,
+                                        boxShadow: boxShadow3,
+                                        image: DecorationImage(
+                                            image: NetworkImage(imgUrl)),
+                                      ),
+                                    ),
+                                  ))
+                              .toList()
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(

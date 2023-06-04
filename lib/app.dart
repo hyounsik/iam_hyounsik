@@ -34,6 +34,10 @@ class _MainAppState extends State<MainApp> {
                   HSLocation location = snapshot.data!;
                   return AnimatedSwitcher(
                       transitionBuilder: (child, animation) {
+                        if (location == HSLocation.home) {
+                          return FadeTransition(
+                              opacity: animation, child: child);
+                        }
                         return ScaleTransition(scale: animation, child: child);
                       },
                       switchInCurve: Curves.easeInOut,
@@ -62,13 +66,13 @@ class _Page extends StatelessWidget {
         alignment: Alignment.center,
         child: Container(
             decoration: BoxDecoration(boxShadow: boxShadow2),
-            constraints: size.width > 600
+            constraints: size.width > mobileWidth
                 ? const BoxConstraints(
                     maxWidth: 1400,
                   )
                 : null,
             child: location == HSLocation.home
-                ? size.width < 600
+                ? size.width < mobileWidth
                     ? const MobileHomePage()
                     : const DesktopHomePage()
                 : DetailPage(location)));
