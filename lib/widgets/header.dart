@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyounsik_info/essential.dart';
 
 class Header extends StatelessWidget {
   final String image;
@@ -49,8 +50,10 @@ class DetailHeader extends StatelessWidget {
 
     return LayoutBuilder(builder: (context, constraints) {
       bool isVertical = constraints.maxWidth < mediaSize.height;
-      double height =
-          isVertical ? constraints.maxWidth : constraints.maxWidth / 2;
+      bool isMobile = mobileWidth > mediaSize.width;
+      // double height =
+      //     isMobile ? constraints.maxWidth : constraints.maxWidth / 2;
+      double height = constraints.maxWidth / 2;
       double width = constraints.maxWidth;
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,

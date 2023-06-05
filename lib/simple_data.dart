@@ -88,7 +88,7 @@ final Map<String, dynamic> detailMapDatas = {
   HSLocation.testvalley.value: {
     'id': '${HSLocation.testvalley.value}_id',
     'backgroundImage':
-        'https://image.hyounsik.info/testvalley/testvalley_hhh_logo.png',
+        'https://image.hyounsik.info/testvalley/testvalley_hand.png',
     'backgroundAccColor': 0xFF19BEE2,
     'backgroundColors': [
       0xFF00DA9B,
@@ -101,7 +101,7 @@ final Map<String, dynamic> detailMapDatas = {
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
     'jobs': [
       {
-        'image': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+        'image': 'https://image.hyounsik.info/testvalley/testvalley_hand.png',
         'title': 'TestVally V2 앱(Flutter) 개발',
         'jobDetails': [
           '- 팩키지 구조 설계',
@@ -115,7 +115,7 @@ final Map<String, dynamic> detailMapDatas = {
         ]
       },
       {
-        'image': 'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+        'image': 'https://image.hyounsik.info/testvalley/isas_tobe.png',
         'title': 'Legacy앱 유지보수 및 속도 개선',
         'jobDetails': ['- 앱 속도 개선', '- 앱 UI/UX 개선', '- 앱 안정성 개선']
       }
@@ -123,7 +123,7 @@ final Map<String, dynamic> detailMapDatas = {
   },
   HSLocation.effy.value: {
     'id': '${HSLocation.effy.value}_id',
-    // 'backgroundImage': 'https://image.hyounsik.info/effy/effy_h_logo.png',
+    'backgroundImage': 'https://image.hyounsik.info/hyounsik/hyounsik.png',
     'backgroundAccColor': 0x55FA7D7A,
     'backgroundColors': [0xffFA7D7A, 0xFFFFFFFF, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/effy/effy_t_logo.png',
@@ -154,10 +154,10 @@ final Map<String, dynamic> detailMapDatas = {
   },
   HSLocation.remon.value: {
     'id': '${HSLocation.remon.value}_id',
-    // 'backgroundImage': 'https://image.hyounsik.info/remon/waggle_logo.png',
+    'backgroundImage': 'https://image.hyounsik.info/remon/webrtc_v_logo.png',
     'backgroundAccColor': 0x00000000,
     'backgroundColors': [0xFFFF921D, 0xFFFFFFFF, 0xFFFFFFFF],
-    'titleImage': 'https://image.hyounsik.info/remon/remon_h_logo.png',
+    'titleImage': 'https://image.hyounsik.info/remon/remon_t_logo.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
     'jobs': [
@@ -195,8 +195,7 @@ final Map<String, dynamic> detailMapDatas = {
   },
   HSLocation.rainbow.value: {
     'id': '${HSLocation.rainbow.value}_id',
-    // 'backgroundImage':
-    //     'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+    'backgroundImage': 'https://image.hyounsik.info/rainbow/rainbow_puke_1.png',
     'backgroundAccColor': 0x00000000,
     'backgroundColors': [
       0xFF1DFFFF,
@@ -205,7 +204,7 @@ final Map<String, dynamic> detailMapDatas = {
       0xFFFFFFFF,
       0xFFFFFFFF
     ],
-    'titleImage': 'https://image.hyounsik.info/rainbow/rain_h_logo.png',
+    'titleImage': 'https://image.hyounsik.info/rainbow/rain_t_logo.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
     'jobs': [
@@ -228,11 +227,10 @@ final Map<String, dynamic> detailMapDatas = {
   },
   HSLocation.sentence.value: {
     'id': '${HSLocation.sentence.value}_id',
-    // 'backgroundImage':
-    //     'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+    'backgroundImage': 'https://image.hyounsik.info/hyounsik/hyounsik.png',
     'backgroundAccColor': 0x00000000,
     'backgroundColors': [0x00000000, 0xFFFFFFFF, 0xFFFFFFFF],
-    'titleImage': 'https://image.hyounsik.info/sentence/sentence_h_logo.png',
+    'titleImage': 'https://image.hyounsik.info/sentence/sentence_t_logo.png',
     'title': 'TestValley',
     'subTtile': 'AOS/IOS (Flutter) 앱 개발',
     'jobs': [
@@ -250,8 +248,7 @@ final Map<String, dynamic> detailMapDatas = {
   },
   HSLocation.flk.value: {
     'id': '${HSLocation.flk.value}_id',
-    // 'backgroundImage':
-    //     'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+    'backgroundImage': 'https://image.hyounsik.info/hyounsik/hyounsik.png',
     'backgroundAccColor': 0x00000000,
     'backgroundColors': [0xFFEC1D49, 0x44EC1D49, 0xFFFFFFFF, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/flk/flk_h_logo.png',
@@ -277,8 +274,7 @@ final Map<String, dynamic> detailMapDatas = {
   },
   HSLocation.aboutMe.value: {
     'id': '${HSLocation.aboutMe.value}_id',
-    // 'backgroundImage':
-    //     'https://image.hyounsik.info/testvalley/testvalley_icon.png',
+    'backgroundImage': 'https://image.hyounsik.info/hyounsik/hyounsik.png',
     'backgroundAccColor': 0x00000000,
     'backgroundColors': [0x00000000, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/hyounsik/hyounsik_logo.png',

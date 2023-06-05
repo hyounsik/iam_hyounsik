@@ -30,6 +30,8 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     Size mediaSize = MediaQuery.of(context).size;
     PathLocationBloc locationBloc = context.read<PathLocationBloc>();
+    String cloud = "https://image.hyounsik.info/cloud_3.png";
+    String me = 'https://image.hyounsik.info/hyounsik/hyounsik.png';
     return LayoutBuilder(builder: (context, constraints) {
       return Stack(
         children: [
@@ -47,23 +49,25 @@ class _DetailPageState extends State<DetailPage> {
                   scrollController1,
                   sizeRatio: 1.5),
               HSBackgroundWidgetData(
-                  // Image.network(e), backgroudScrollControllers[e]!,
-                  Container(
-                    width: 50,
-                    height: constraints.maxWidth * 0.8,
-                    color: pageData.backgroundAccColor,
+                Padding(
+                  padding: EdgeInsets.only(top: 80, right: mediaSize.width / 8),
+                  child: Image.network(
+                    pageData.backgroundImage ?? me,
+                    width:
+                        mediaSize.width / 5 > 300 ? mediaSize.width / 5 : 300,
                   ),
-                  scrollController2,
-                  scrollDirection: Axis.horizontal,
-                  reverse: true,
-                  sizeRatio: 1.3),
-              if (pageData.backgroundImage != null)
-                HSBackgroundWidgetData(
-                    Image.network(pageData.backgroundImage!), scrollController3,
-                    // Container(),
-                    // backgroudScrollControllers[e]!,
-                    reverse: true,
-                    sizeRatio: 1.5),
+                ),
+                scrollController2,
+                sizeRatio: 1.15,
+                // scale: 0.5,
+                alignment: Alignment.centerRight,
+              ),
+              HSBackgroundWidgetData(Image.network(cloud), scrollController3,
+                  sizeRatio: 1.08,
+                  scale: 1.2,
+                  alignment: Alignment.bottomRight,
+                  padding: const EdgeInsets.only(right: 48),
+                  reverse: true),
             ],
             foregroundContent:
                 Center(child: LayoutBuilder(builder: (context, constraints) {
@@ -75,15 +79,20 @@ class _DetailPageState extends State<DetailPage> {
                     fit: BoxFit.contain,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(right: 16),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           pageData.title,
-                          style: subHeaderTextStyle24,
+                          style: subHeaderTextStyle24.apply(
+                              shadows: fontWhiteShadow),
                         ),
-                        Text(pageData.subTtile),
+                        Text(
+                          pageData.subTtile,
+                          style:
+                              bodyTextStyle12.apply(shadows: fontWhiteShadow),
+                        ),
                       ],
                     ),
                   ),
@@ -123,6 +132,7 @@ class DetailJobCard extends StatelessWidget {
       double imageWidth = constraints.maxWidth / 3;
       // constraints.maxWidth / 3 > 300 ? 300 : constraints.maxWidth / 3;
       return Container(
+        constraints: BoxConstraints(minHeight: 300),
         decoration: BoxDecoration(color: Colors.white70, boxShadow: boxShadow),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,14 +153,14 @@ class DetailJobCard extends StatelessWidget {
                 ),
                 Text(
                   jobData.title,
-                  style: headerTextStyle48,
+                  style: headerTextStyle32,
                 ),
                 ...jobData.jobDetails
                     .map((e) => Padding(
                           padding: const EdgeInsets.only(left: 16),
                           child: Text(
                             e,
-                            style: subHeaderTextStyle24,
+                            style: bodyTextStyle16,
                           ),
                         ))
                     .toList()

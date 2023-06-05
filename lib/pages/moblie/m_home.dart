@@ -17,7 +17,7 @@ class _MobileHomePageState extends State<MobileHomePage> {
   @override
   Widget build(BuildContext context) {
     String cloud = "https://image.hyounsik.info/cloud_3.png";
-    String me = "https://image.hyounsik.info/hyounsik.png";
+    String me = "https://image.hyounsik.info/hyounsik/hyounsik.png";
 
     Size mediaSize = MediaQuery.of(context).size;
     PathLocationBloc locationBloc = context.read<PathLocationBloc>();
@@ -75,7 +75,8 @@ class _MobileHomePageState extends State<MobileHomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Header(
-                  image: 'https://image.hyounsik.info/hyounsik_logo.png',
+                  image:
+                      'https://image.hyounsik.info/hyounsik/hyounsik_logo.png',
                 ),
                 ...simpleCardDatas.map((item) {
                   return SimpleCard(

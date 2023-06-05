@@ -28,20 +28,26 @@ class SimpleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile = MediaQuery.of(context).size.width < mobileWidth;
     return Column(
       children: [
         SizedBox(
           width: double.infinity,
           child: Container(
-            constraints: const BoxConstraints(
-              minHeight: 600,
-            ),
+            constraints: isMobile
+                ? null
+                : const BoxConstraints(
+                    minHeight: 600,
+                  ),
             decoration: BoxDecoration(
                 color: color,
                 boxShadow: boxShadow,
                 borderRadius: borderRadius24),
             child: Column(
               children: [
+                const SizedBox(
+                  height: 4,
+                ),
                 Opacity(
                   opacity: 0.93,
                   child: Padding(
@@ -54,8 +60,10 @@ class SimpleCard extends StatelessWidget {
                         children: [
                           ...(imgUrls ?? [])
                               .map((imgUrl) => Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24),
+                                    padding: (imgUrls ?? []).length == 1
+                                        ? EdgeInsets.zero
+                                        : const EdgeInsets.symmetric(
+                                            horizontal: 24),
                                     child: Container(
                                       width: imageWidth,
                                       height: imageHeight,
@@ -73,8 +81,8 @@ class SimpleCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
+                SizedBox(
+                  height: isMobile ? 0 : 24,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -84,13 +92,19 @@ class SimpleCard extends StatelessWidget {
                       AutoSizeText(
                         dateString ?? '0000.00 ~ 0000.00',
                         maxLines: 1,
-                        style: subHeaderTextStyle32.apply(color: textColor),
+                        style: isMobile
+                            ? (titleStyle ?? subHeaderTextStyle24)
+                                .apply(color: textColor)
+                            : subHeaderTextStyle32.apply(color: textColor),
                       ),
                       AutoSizeText(
                         title ?? 'Title',
                         maxLines: 1,
-                        style: (titleStyle ?? headerTextStyle88)
-                            .apply(color: textColor),
+                        style: isMobile
+                            ? (titleStyle ?? headerTextStyle56)
+                                .apply(color: textColor)
+                            : (titleStyle ?? headerTextStyle88)
+                                .apply(color: textColor),
                       ),
                       const SizedBox(
                         height: 12,
@@ -99,7 +113,10 @@ class SimpleCard extends StatelessWidget {
                         subTitle ?? 'sub title',
                         maxLines: 2,
                         textAlign: TextAlign.center,
-                        style: headerTextStyle32.apply(color: textColor),
+                        style: isMobile
+                            ? (titleStyle ?? subHeaderTextStyle18)
+                                .apply(color: textColor)
+                            : headerTextStyle32.apply(color: textColor),
                       ),
                       const SizedBox(
                         height: 12,
@@ -113,7 +130,10 @@ class SimpleCard extends StatelessWidget {
                           children: [
                             Text(
                               '자세히',
-                              style: linkTextStyle24,
+                              style: isMobile
+                                  ? (titleStyle ?? linkTextStyle18)
+                                      .copyWith(fontWeight: FontWeight.bold)
+                                  : linkTextStyle24,
                             ),
                             const Icon(
                               Icons.keyboard_arrow_right,
@@ -135,7 +155,7 @@ class SimpleCard extends StatelessWidget {
         ),
         const SizedBox(
           height: 40,
-        )
+        ),
       ],
     );
   }
