@@ -27,7 +27,7 @@ class SideNavigator extends StatelessWidget {
                 }
               },
               child: Container(
-                padding: const EdgeInsets.only(left: 4).add(
+                padding: const EdgeInsets.only(left: 4, right: 4).add(
                   EdgeInsets.symmetric(vertical: isMobile ? 4 : 8),
                 ),
                 decoration: BoxDecoration(
