@@ -1,3 +1,5 @@
 # hyounsik_lnfo
 
-A new Flutter project.
+ - https://hyounsik.info
+ - flutter
+ - gcp cdn, storage

@@ -108,7 +108,7 @@ final Map<String, dynamic> detailMapDatas = {
     'title': 'TestValley(비엘큐)',
     'dateString': '2022.11 ~ 현재',
     'subTtile':
-        '''Flutter를 이용한 AOS/iOS 앱 개발을 하였습니다. Flutter로 제작된 V1앱을 개션하며 V1앱 운영과 동시에 V2앱 신규 개발을 진행 하여 성공적으로 V2앱을 런칭 하였습니다.''',
+        '''Flutter를 이용한 AOS/iOS 앱 개발을 하였습니다.\nFlutter로 제작된 Legacy 앱 운영 및 개선 작업과 동시에\nV2앱 신규 개발을 진행 하여 성공적으로 V2앱을 런칭 하였습니다.''',
     'jobs': [
       {
         'image': 'https://image.hyounsik.info/testvalley/testvalley_app.png',
@@ -433,7 +433,8 @@ final Map<String, dynamic> detailMapDatas = {
     'titleImage': 'https://image.hyounsik.info/hyounsik/hyounsik_logo.png',
     'title': 'Lee Hyoun Sik',
     'dateString': '2010.03 ~ 2013.02',
-    'subTtile': '안녕하세요. 이현식 입니다.\nh.sik3768@gmail.com',
+    'subTtile':
+        '안녕하세요. 이현식 입니다.\nh.sik3768@gmail.com\nhttps://github.com/hyounsik/iam_hyounsik',
     'jobs': [
       {
         // 'image': 'https://image.hyounsik.info/h_1.png',
