@@ -456,6 +456,35 @@ final Map<String, dynamic> detailMapDatas = {
         ],
         'backgroundColor': 0xAA000000,
         'textColor': 0xFFFFFFFF
+      },
+      {
+        // 'image': 'https://image.hyounsik.info/h_1.png',
+        'title': '나는 무엇을 해보았지?',
+        'dateString': '',
+        'jobDetails': [
+          'Python',
+          'AWS',
+          'Git',
+          'iOS',
+          'HTML',
+          'JavaScript',
+          'MySQL',
+          'SQL',
+          'C / C++',
+          'Github',
+          'Flutter',
+          'Swift',
+          'Objective-C',
+          'Java',
+          'Neo4j',
+          'CouchDB',
+          'MongoDB',
+          'Firebase',
+          'GCP',
+          '등등..'
+        ],
+        'backgroundColor': 0xAA000000,
+        'textColor': 0xFFFFFFFF
       }
     ]
   }
