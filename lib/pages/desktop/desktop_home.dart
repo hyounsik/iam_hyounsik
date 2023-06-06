@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hyounsik_info/essential.dart';
-import 'package:hyounsik_info/simple_data.dart';
 
 class DesktopHomePage extends StatefulWidget {
   const DesktopHomePage({super.key});
@@ -17,8 +16,6 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   Widget build(BuildContext context) {
     String cloud = "https://image.hyounsik.info/cloud_3.png";
     String me = 'https://image.hyounsik.info/hyounsik/hyounsik.png';
-
-    Uri base = Uri.base;
 
     Size mediaSize = MediaQuery.of(context).size;
     PathLocationBloc locationBloc = context.read<PathLocationBloc>();
