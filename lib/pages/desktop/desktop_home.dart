@@ -18,6 +18,8 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
     String cloud = "https://image.hyounsik.info/cloud_3.png";
     String me = 'https://image.hyounsik.info/hyounsik/hyounsik.png';
 
+    Uri base = Uri.base;
+
     Size mediaSize = MediaQuery.of(context).size;
     PathLocationBloc locationBloc = context.read<PathLocationBloc>();
     return Scaffold(
