@@ -380,7 +380,7 @@ final Map<String, dynamic> detailMapDatas = {
     'backgroundAccColor': 0x00000000,
     'backgroundColor': 0xFF000000,
     'backgroundColors': [0xFFEC1D49, 0x44EC1D49, 0xFFFFFFFF, 0xFFFFFFFF],
-    'titleImage': 'https://image.hyounsik.info/flk/flk_h_t_logo.png',
+    'titleImage': 'https://image.hyounsik.info/flk/flk_h_logo_2.png',
     'title': 'flk',
     'dateString': '2010.03 ~ 2013.02',
     'subTtile': 'iOS 앱 개발 및 Epub Reder 라이브러리 개발 및 운영',
