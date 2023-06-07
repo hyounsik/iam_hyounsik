@@ -379,7 +379,7 @@ final Map<String, dynamic> detailMapDatas = {
     'backgroundImage': 'https://image.hyounsik.info/hyounsik/hyounsik.png',
     'backgroundAccColor': 0x00000000,
     'backgroundColor': 0xFF000000,
-    'backgroundColors': [0xFFEC1D49, 0x44EC1D49, 0xFFFFFFFF, 0xFFFFFFFF],
+    'backgroundColors': [0xAAEC1D49, 0x33EC1D49, 0xFFFFFFFF, 0xFFFFFFFF],
     'titleImage': 'https://image.hyounsik.info/flk/flk_h_logo_2.png',
     'title': 'flk',
     'dateString': '2010.03 ~ 2013.02',
