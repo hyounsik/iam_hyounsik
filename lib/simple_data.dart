@@ -6,7 +6,7 @@ final List<Map<String, dynamic>> simpleMapDatas = [
   {
     'images': ['https://image.hyounsik.info/testvalley/testvalley_icon.png'],
     'title': 'TestValley',
-    'subTtile': 'AOS/iOS (Flutter) 앱 개발',
+    'subTtile': 'AOS/iOS(Flutter) e-Commerce 앱 개발',
     'dateString': '2022.11 ~ 현재',
     'path': HSLocation.testvalley.value
   },
@@ -104,7 +104,7 @@ final Map<String, dynamic> detailMapDatas = {
       0xFFFFFFFF,
     ],
     'titleImage':
-        'https://image.hyounsik.info/testvalley/testvalley_black_t_logo.png',
+        'https://image.hyounsik.info/testvalley/testvalley_black_t_logo_2.png',
     'title': 'TestValley(비엘큐)',
     'dateString': '2022.11 ~ 현재',
     'subTtile':
@@ -380,7 +380,7 @@ final Map<String, dynamic> detailMapDatas = {
     'backgroundAccColor': 0x00000000,
     'backgroundColor': 0xFF000000,
     'backgroundColors': [0xFFEC1D49, 0x44EC1D49, 0xFFFFFFFF, 0xFFFFFFFF],
-    'titleImage': 'https://image.hyounsik.info/flk/flk_h_logo.png',
+    'titleImage': 'https://image.hyounsik.info/flk/flk_h_t_logo.png',
     'title': 'flk',
     'dateString': '2010.03 ~ 2013.02',
     'subTtile': 'iOS 앱 개발 및 Epub Reder 라이브러리 개발 및 운영',
