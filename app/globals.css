@@ -1,11 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@heroui/react/styles";
+
+@theme {
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #1c1c1c;
+  --color-mute: #c9c9c9;
+  --color-shell: #f4f4f4;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-white text-ink antialiased;
+  background: white;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* spencergabor.work 스타일의 초대형 헤드라인 — 화면 폭에 꽉 차게 스케일 */
+.display-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
 }

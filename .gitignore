@@ -25,5 +25,8 @@ next-env.d.ts
 .firebase/
 firebase-debug.log
 
+# 배포용 인증 정보 (firebase service account 등) — 절대 커밋하지 않음
+.cert/
+
 # IDE
 .idea/
