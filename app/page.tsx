@@ -5,11 +5,6 @@ import { ImageStack } from '@/components/image-stack';
 import { ContactSection } from '@/components/contact-section';
 
 export default function HomePage() {
-  const heroCards = featuredProjects.slice(0, 4).map((project) => {
-    const cover = project.media.find((item) => item.kind === 'image') ?? project.media[0];
-    return { src: cover.src, alt: cover.alt };
-  });
-
   return (
     <>
       <section className="px-6 pt-10 text-center">
@@ -23,7 +18,7 @@ export default function HomePage() {
 
         <h1 className="display-hero mt-24 [font-size:13vw]">{site.nameEn}</h1>
 
-        <ImageStack items={heroCards} size="lg" className="mx-auto mt-[5vw] max-w-3xl" />
+        <ImageStack items={site.heroImages} size="lg" className="mx-auto mt-[5vw] max-w-3xl" />
 
         <p className="display-hero mt-10 text-mute [font-size:8vw]">
           Flutter, iOS

@@ -11,13 +11,10 @@ export const site = {
     '조직의 상황에 맞는 기술 스택 선정과 마이크로 서비스 설계 및 운영',
     '서버, 클라우드, Docker를 이용하여 테스트, CI, 배포, 모니터, 비즈니스 측정등 전반적인 사용자 응용 서비스 개발-운영 경험',
   ],
-  // TODO: 실제 연락처로 교체 — 현재는 더미 데이터
   contact: {
-    email: 'hello@example.com',
-    phone: '+82 10-0000-0000',
-    github: 'https://github.com/example',
-    medium: 'https://medium.com/@example',
-    linkedin: 'https://linkedin.com/in/example',
+    email: 'h.sik3768@gmail.com',
+    github: 'https://github.com/hyounsik',
+    medium: 'https://medium.com/@sk3767',
   },
   companies: [
     '에이디지컴퍼니',
@@ -61,5 +58,20 @@ export const site = {
       title: 'Product of the Day — Product Hunt',
       url: 'https://www.producthunt.com/products/effy',
     },
+  ],
+  /**
+   * 홈 히어로의 이미지 스택에 노출할 이미지.
+   * 프로젝트 데이터와 분리해 직접 지정한다 — 대표 이미지를 자동으로 고르지 않고
+   * 히어로에 어울리는 자산을 원하는 순서로 배치하기 위함.
+   * 개수는 가변이며, 배열 순서대로 왼쪽부터 겹쳐 쌓인다.
+   *
+   * 작게 겹쳐 보이는 영역이라 화면 스크린샷은 형태가 뭉개진다.
+   * 한눈에 읽히는 로고/심볼만 쓰고, 어두운 것과 밝은 것을 번갈아 배치한다.
+   */
+  heroImages: [
+    { src: '/images/adg/soonshot_logo.png', alt: 'Soonshot 심볼' },
+    { src: '/images/effy/effy_icon.png', alt: 'RemoteMonster 심볼' },
+    { src: '/images/crispy/crispy_home_mainbanner.png', alt: 'Crispy Lit 홈 화면' },
+    { src: '/images/rainbow/rainbow_tving_logo_square.png', alt: 'TVING 심볼' },
   ],
 } as const;

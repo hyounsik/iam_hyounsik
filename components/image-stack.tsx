@@ -37,7 +37,8 @@ const RADIUS: Record<StackSize, string> = {
 const TILTS = ['-rotate-6', 'rotate-3', '-rotate-3', 'rotate-6', '-rotate-2', 'rotate-5'];
 
 type ImageStackProps = {
-  items: StackItem[];
+  /** `as const`로 선언된 배열도 받을 수 있도록 readonly로 둔다 */
+  items: readonly StackItem[];
   /** 카드 크기. 저해상도 이미지는 sm/md로 작게 노출하면 열화가 덜 보인다 */
   size?: StackSize;
   /** 각 카드를 정사각형으로 자를지 여부. false면 원본 비율 유지 */

@@ -33,7 +33,10 @@ export default async function ProjectPage({
   const project = getProject(slug);
   if (!project) notFound();
 
-  const videos = project.media.filter((item) => item.kind === 'video');
+  // 영상(YouTube 임베드 + 로컬 파일)을 먼저, 이미지를 뒤에 배치한다
+  const videos = project.media.filter(
+    (item) => item.kind === 'youtube' || item.kind === 'video',
+  );
   const images = project.media.filter((item) => item.kind === 'image');
 
   return (
@@ -90,17 +93,36 @@ export default async function ProjectPage({
         )}
 
         <div className="mt-16 space-y-10">
-          {videos.map((item) => (
-            <div key={item.src} className="overflow-hidden rounded-3xl bg-shell">
-              <iframe
-                src={item.src}
-                title={item.alt}
-                allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
-                allowFullScreen
-                className="aspect-video w-full"
-              />
-            </div>
-          ))}
+          {videos.map((item) =>
+            item.kind === 'youtube' ? (
+              <div key={item.src} className="overflow-hidden rounded-3xl bg-shell">
+                <iframe
+                  src={item.src}
+                  title={item.alt}
+                  allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                  className="aspect-video w-full"
+                />
+              </div>
+            ) : (
+              // 세로 영상이 많아 aspect 고정 없이 원본 비율을 유지한다.
+              // 브라우저는 소리 있는 자동재생을 막으므로 muted가 필수다.
+              <div key={item.src} className="overflow-hidden rounded-3xl bg-shell">
+                <video
+                  src={item.src}
+                  poster={item.poster}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  aria-label={item.alt}
+                  className="mx-auto max-h-[80vh] w-full object-contain"
+                />
+              </div>
+            ),
+          )}
 
           {images.length > 0 &&
             (project.mediaLayout === 'stack' ? (

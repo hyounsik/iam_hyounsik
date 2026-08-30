@@ -25,7 +25,10 @@
 - 더미 이미지: `public/placeholder/shot-1~6.svg`
 - 더미 영상: YouTube embed 더미 링크
 - `lib/projects.ts`의 `Media.placeholder: true` 플래그로 교체 필요 자산을 표시
-- 실제 링크가 확인된 영상은 이미 반영: KOKIRI(`youtu.be/nl0sN3i6weU`), Effy Live(`youtu.be/fvDae0-39jE`), Waggle Quiz(`youtu.be/e_SQb7TKld8`)
+- 영상 반영 현황: Effy Live(`youtu.be/fvDae0-39jE`), Crispy Lit(`youtu.be/MBbKiUsjyF0`)는 YouTube 임베드
+- KOKIRI는 YouTube 영상이 재생 불가(UNPLAYABLE)여서 **직접 호스팅**으로 전환 — `public/images/kokiri/kokiri_intro.mp4`를 `<video>`로 재생
+- 영상 종류는 `Media.kind`로 구분: `youtube`(iframe) / `video`(로컬 파일, `clip()` 헬퍼)
+- 로컬 영상은 `lib/*.ts`가 참조하는 파일만 `datas/` → `public/`으로 동기화된다 (화면녹화 원본이 수백 MB라 전체 복사 금지)
 - 연락처(`lib/site.ts`의 `contact`)는 **더미 데이터** — 실제 정보로 교체 필요
 
 ## 기술 스택 결정
@@ -90,9 +93,8 @@ datas/                # 원본 자료
 
 | slug | 프로젝트 | 회사 | 기간 | Featured |
 | --- | --- | --- | --- | --- |
-| drama-remix | 드라마 리믹스 | 에이디지컴퍼니 | 2026.07 - 2026.08 | ✓ |
+| soonshot | Soonshot (앱 개편 + 드라마 리믹스) | 에이디지컴퍼니 | 2025.10 - 2026.08 | ✓ |
 | ai-character-chat | AI 캐릭터챗 | 에이디지컴퍼니 | 2026.03 - 2026.04 | ✓ |
-| soonshot | Soonshot | 에이디지컴퍼니 | 2025.10 - 2026.08 | ✓ |
 | ai-chatbot-client | AI 챗봇 서비스 클라이언트 | 더크리스피 | 2025.07 - 2025.08 | |
 | crispy-lit | Crispy Lit Short Drama | 더크리스피 | 2025.03 - 2025.07 | ✓ |
 | kokiri | KOKIRI | 코이랩스 | 2023.09 - 2025.01 | ✓ |

@@ -1,8 +1,15 @@
 export type Media = {
-  kind: 'image' | 'video';
-  /** 이미지 경로 또는 YouTube watch/embed URL */
+  /**
+   * 'image'   — public 아래의 이미지
+   * 'youtube' — YouTube embed (iframe)
+   * 'video'   — public 아래의 영상 파일 (video 태그로 직접 재생)
+   */
+  kind: 'image' | 'youtube' | 'video';
+  /** public 아래 경로 또는 YouTube embed URL */
   src: string;
   alt: string;
+  /** 영상 로드 전 보여줄 포스터 이미지 (kind: 'video' 전용) */
+  poster?: string;
   /** 실제 자료로 교체가 필요한 더미 자산 */
   placeholder?: boolean;
 };
@@ -41,32 +48,60 @@ const shot = (src: string, alt: string, needsReview = false): Media => ({
 
 /** YouTube embed (watch URL이 아닌 /embed/ 형식이어야 iframe이 동작) */
 const youtube = (id: string, alt: string): Media => ({
-  kind: 'video',
+  kind: 'youtube',
   src: `https://www.youtube.com/embed/${id}`,
   alt,
 });
 
+/**
+ * public/images 아래의 영상 파일을 직접 재생한다.
+ * YouTube 임베드가 막히는 영상(퍼가기 불가·재생 제한)에 쓴다.
+ * poster를 주면 로드 전 첫 화면으로 보여준다.
+ */
+const clip = (src: string, alt: string, poster?: string): Media => ({
+  kind: 'video',
+  src: `/images/${src}`,
+  alt,
+  ...(poster ? { poster: `/images/${poster}` } : {}),
+});
+
 export const projects: Project[] = [
   {
-    slug: 'drama-remix',
-    title: '드라마 리믹스',
+    slug: 'soonshot',
+    title: 'Soonshot',
     company: '에이디지컴퍼니',
-    period: '2026.07 - 2026.08',
+    period: '2025.10 - 2026.08',
     role: '시니어 개발자',
     featured: true,
-    accentColor: '#FF5A36',
+    accentColor: '#111318',
     summary:
-      '클라이언트에서 미리보기하고 서버에서 실제 인코딩하는 영상 리믹스 파이프라인을 설계·개발했습니다.',
+      "숏폼 드라마 앱 'Soonshot'을 도메인 기반 설계로 1.0에서 1.5로 개편하고, 클라이언트 미리보기와 서버 인코딩으로 이어지는 영상 리믹스 파이프라인을 설계·개발했습니다.",
     highlights: [
-      '클라이언트측 영상 편집 — 클리핑, 회전, 크롭 / Text·Image 오버레이 기능 개발',
-      'GCP CloudRun을 이용한 서버리스 영상 인코더 개발. 서버측 클리핑·회전·크롭 / Text·Image 오버레이 기능 개발',
-      'HLS 영상 생성 및 HLS 기반 영상 플레이 기능 개발',
-      '클라이언트 미리보기 → 서버측 실제 영상 편집으로 이어지는 기능 설계 및 개발',
+      '1.0 버전 → 1.5 버전 개편. 도메인 기반 설계를 적용하여 신규 개발',
+      '기존 기능을 유지하면서 신규 버전으로 개발 및 배포',
+      'Provider, RxDart, GoRouter로 상태 관리·의존성 주입·라우팅을 체계화하고 확장 가능한 아키텍처 구축',
+      'iOS·Android 동시 배포. App Store·Google Play 등록 및 심사 대응, TestFlight 기반 베타 배포와 단계적 출시 관리',
+      '드라마 리믹스 — 클라이언트측 영상 편집(클리핑·회전·크롭 / Text·Image 오버레이) 기능 개발 (2026.07 - 2026.08)',
+      '드라마 리믹스 — GCP CloudRun 기반 서버리스 영상 인코더 개발. 서버측 클리핑·회전·크롭 / Text·Image 오버레이 처리',
+      '드라마 리믹스 — HLS 영상 생성 및 HLS 기반 영상 플레이 기능 개발',
+      '드라마 리믹스 — 클라이언트 미리보기 → 서버측 실제 영상 편집으로 이어지는 파이프라인 설계 및 개발',
     ],
-    stack: ['Flutter', 'Firebase Cloud Functions', 'ffmpeg', 'GCP CloudRun', 'HLS'],
+    stack: [
+      'Flutter',
+      'RxDart',
+      'Freezed',
+      'Provider',
+      'GetIt',
+      'GoRouter',
+      'Firebase Cloud Functions',
+      'ffmpeg',
+      'GCP CloudRun',
+      'HLS',
+    ],
     media: [
-      shot('crispy/crispy_preview.png', '드라마 리믹스 편집 미리보기 화면', true),
-      shot('crispy/crispy_preview2.png', '리믹스 결과 재생 화면', true),
+      shot('adg/soonshot_home.png', 'Soonshot 홈 화면'),
+      shot('adg/soonshot_remix.png', 'Soonshot 드라마 리믹스 편집 화면'),
+      shot('adg/soonshot_reward.png', 'Soonshot 리워드 화면'),
     ],
   },
   {
@@ -87,40 +122,14 @@ export const projects: Project[] = [
       'Firebase를 이용하여 단기/장기 대화 메모리 관리',
     ],
     stack: ['Flutter', 'Firestore', 'Firebase Cloud Functions', 'Gemini API', 'Vertex AI'],
-    // 원본이 359x780로 작아 확대하면 열화되므로 스택으로 작게 노출
     media: [
-      shot('crispy/crushpop_chat_1.jpeg', 'AI 캐릭터챗 대화 화면', true),
-      shot('crispy/crushpop_character.jpeg', '캐릭터 프로필 화면', true),
-      shot('crispy/crushpop_chat_model.jpeg', '캐릭터 관리자 페이지', true),
-    ],
-    mediaLayout: 'stack',
-  },
-  {
-    slug: 'soonshot',
-    title: 'Soonshot',
-    company: '에이디지컴퍼니',
-    period: '2025.10 - 2026.08',
-    role: '시니어 개발자',
-    featured: true,
-    accentColor: '#111318',
-    summary:
-      "숏폼 드라마 앱 'Soonshot'을 도메인 기반 설계로 다시 세우며 1.0에서 1.5로 개편했습니다.",
-    highlights: [
-      '1.0 버전 → 1.5 버전 개편. 도메인 기반 설계를 적용하여 신규 개발',
-      '기존 기능을 유지하면서 신규 버전으로 개발 및 배포',
-      'Provider, RxDart, GoRouter로 상태 관리·의존성 주입·라우팅을 체계화하고 확장 가능한 아키텍처 구축',
-      'iOS·Android 동시 배포. App Store·Google Play 등록 및 심사 대응, TestFlight 기반 베타 배포와 단계적 출시 관리',
-    ],
-    stack: ['Flutter', 'RxDart', 'Freezed', 'Provider', 'GetIt', 'GoRouter'],
-    media: [
-      shot('crispy/crispy_drama.png', 'Soonshot 드라마 재생 화면', true),
-      shot('crispy/crispy_home_mainbanner.png', 'Soonshot 홈 화면', true),
-      shot('crispy/crispy_home_newcontent.png', 'Soonshot 신규 콘텐츠 영역', true),
+      shot('adg/soonshot_ai.png', 'AI챗 캐릭터 화면'),
+      shot('adg/soonshot_ai_chat.png', 'AI 캐릭터챗 대화 화면'),
     ],
   },
   {
     slug: 'ai-chatbot-client',
-    title: 'AI 챗봇 서비스 클라이언트',
+    title: 'AI 챗 Crushpop',
     company: '더크리스피',
     period: '2025.07 - 2025.08',
     role: '개발',
@@ -136,6 +145,7 @@ export const projects: Project[] = [
     stack: ['Svelte 5', 'Tailwind CSS'],
     // 원본이 359x780로 작아 확대하면 열화되므로 스택으로 작게 노출
     media: [
+      shot('crispy/crushpop_character.jpeg', 'AI 챗봇 홈 화면', true),
       shot('crispy/crushpop_store.jpeg', 'AI 챗봇 클라이언트 화면', true),
       shot('crispy/crushpop_profile.jpeg', '프로필 화면', true),
     ],
@@ -160,6 +170,7 @@ export const projects: Project[] = [
     ],
     stack: ['Flutter', 'RxDart', 'Freezed', 'Provider', 'Riverpod', 'GetIt', 'GoRouter'],
     media: [
+      youtube('MBbKiUsjyF0', 'Crispy 앱 소개'),
       shot('crispy/crispy_home_mainbanner.png', 'Crispy 앱 홈 메인 배너'),
       shot('crispy/crispy_drama.png', 'Crispy 드라마 플레이어 화면'),
       shot('crispy/crispy_home_newcontent.png', 'Crispy 신규 콘텐츠 목록'),
@@ -203,13 +214,13 @@ export const projects: Project[] = [
       'MySQL',
     ],
     media: [
-      youtube('nl0sN3i6weU', 'KOKIRI 앱 소개 영상'),
-      shot('kokiri/kokiri_home.png', 'KOKIRI 앱 홈 화면'),
+      // YouTube 대신 직접 호스팅하는 영상으로 대체했다
+      clip('kokiri/kokiri_intro.mp4', 'KOKIRI 앱 소개 영상'),
+      shot('kokiri/kokiri_screenshot.png', 'KOKIRI 앱 홈 화면'),
       shot('kokiri/kokiri_news.png', 'KOKIRI 뉴스 화면'),
       shot('kokiri/kokiri_player_b.png', 'KOKIRI 영상 플레이어 화면'),
       shot('kokiri/kokiri_app_store.png', 'KOKIRI App Store 등록 페이지'),
     ],
-    links: [{ label: '앱 소개 영상', url: 'https://youtu.be/nl0sN3i6weU' }],
   },
   {
     slug: 'testvalley',
@@ -235,6 +246,7 @@ export const projects: Project[] = [
     ],
     stack: ['Flutter', 'RxDart', 'Freezed', 'Provider', 'GetIt', 'melos', 'Firebase', 'GoRouter'],
     media: [
+      shot('testValley/testValley_init_page.PNG', 'TestValley 초기 화면'),
       shot('testValley/testValley_home.PNG', 'TestValley 홈 화면'),
       shot('testValley/testValley_product_detail.PNG', 'TestValley 상품 상세 화면'),
       shot('testValley/testValley_category.PNG', 'TestValley 카테고리 화면'),
@@ -283,9 +295,10 @@ export const projects: Project[] = [
     ],
     media: [
       youtube('fvDae0-39jE', 'Effy Live 앱 소개 영상'),
-      shot('effy/effy_shortform_feed.PNG', 'Effy Live 숏폼 피드'),
+      shot('effy/effy_icon.png', 'Effy Live 라이브 방송 화면'),
       shot('effy/effy_live_broadcast_group.PNG', 'Effy Live 라이브 방송 화면'),
       shot('effy/effy_random_match.PNG', 'Effy Live 랜덤 매칭 화면'),
+      shot('effy/effy_shortfrom_feed.PNG', 'Effy Live 숏폼 피드'),
       shot('effy/effy_create_page.PNG', 'Effy Live 음성 포스트 작성 화면'),
       shot('effy/effy_google_play_store.png', 'Effy Live Google Play 등록 페이지'),
     ],
@@ -314,8 +327,7 @@ export const projects: Project[] = [
     ],
     stack: ['Flutter', 'RxDart', 'Freezed', 'Provider', 'GetIt', 'chopper', 'Widget Book', 'Firebase'],
     media: [
-      shot('effy/effy_search.PNG', 'Flutter 외주 프로젝트 화면', true),
-      shot('effy/effy_inbox.PNG', '알림/인박스 화면', true),
+      shot('effy/effy_splash.png', 'Flutter 외주 프로젝트 화면', true),
     ],
   },
   {
@@ -331,6 +343,7 @@ export const projects: Project[] = [
     highlights: [
       'iOS용 WebRTC 라이브러리 개발 및 cocoapods 배포. 개발자가 이해하기 쉬운 API 설계 및 유지보수',
       '개발자를 위한 SDK 레퍼런스 문서 및 가이드 작성',
+      '튜터링·뉴스토마토 등 고객사에 SDK를 배포하고 도입·적용을 기술 지원',
       'Waggle Quiz — WebRTC 실시간 방송 및 퀴즈 진행, 1000+ 동시 참여 라이브 방송 기능 개발',
       'Waggle Quiz — rx-swift로 Firebase Realtime DB 동기화 모듈 개발, CloudFunction(express)·FirebaseDB 백엔드 개발',
       'Waggle — WebRTC 라이브 방송, swift concurrency async/await 적용, UIKit UI 개발',
@@ -339,7 +352,8 @@ export const projects: Project[] = [
     ],
     stack: ['Swift', 'UIKit', 'RxSwift', 'WebRTC', 'SocketIO', 'Node.js', 'Express', 'Firebase', 'Neo4j'],
     media: [
-      youtube('e_SQb7TKld8', 'Waggle Quiz 라이브 퀴즈쇼 영상'),
+      youtube('SFiQBqciQRA', 'Waggle Quiz 라이브 퀴즈쇼 영상'),
+      youtube('e_SQb6TKld8', 'Waggle Quiz 라이브 퀴즈쇼 지연시간 테스트'),
       shot('remon/remon_waggle_quiz_home.jpg', 'Waggle Quiz 홈 화면'),
       shot('remon/remon_waggle_quiz_winner.jpg', 'Waggle Quiz 우승자 화면'),
       shot('remon/remon_waggle_quiz_design.jpg', 'Waggle Quiz 디자인 시안'),

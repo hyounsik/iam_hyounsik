@@ -322,6 +322,20 @@ Sqlite DB 설계 및 json 타입 export/import 기능 개발
 
 Python, AWS, Git, iOS, HTML, JavaScript, MySQL, SQL, C / C++, GitHub, Flutter, Swift, Objective-C, Java, Neo4j, CouchDB, MongoDB, Firebase, GCP, Node.js, Dart
 
+## 성향
+
+<!-- 책장 소장 도서를 근거로 정리. 상세 내용은 hyounsik_성향.md 참고 -->
+
+- **설계 기준은 유지하고, 도구는 요구에 맞춰 바꾼다.** Clean Architecture, 엔터프라이즈 애플리케이션 아키텍처 패턴(PoEAA), 리팩터링(1·2판), 데이터 중심 애플리케이션 설계(DDIA)를 꾸준히 읽어 왔고, 이를 'effy live'의 Active Record → Clean Architecture + BLoC 전면 리팩토링, TestValley V2 아키텍처 재설계, Soonshot 도메인 기반 설계로 실행해 왔습니다.
+- **돌아가는 코드와 좋은 코드를 구분하려 합니다.** Effective Java·Effective JavaScript·자바 퍼즐러 등 언어의 관용과 함정을 다루는 책, TDD(Kent Beck)·Effective Unit Testing 등 테스트 서적을 함께 봅니다.
+- **반응형·함수형 사고를 실무 선택의 기준으로 삼습니다.** Functional Thinking, 반응형 프로그래밍 RxJS를 읽고 RxDart·RxSwift를 일관되게 적용해 왔습니다. Elixir는 업무에 쓰지 않지만 관심을 두고 학습합니다.
+- **특정 언어에 정체성을 두지 않습니다.** Swift/Objective-C/Cocoa, Java, JavaScript/TypeScript, Node.js, Python, Go, Elixir, Dart를 두루 다루며, iOS → 서버 → Flutter → 웹으로 이어진 경력 궤적과 일치합니다.
+- **저장소를 목적별로 나눠 씁니다.** Neo4j(그래프), SQLite, NoSQL, GraphQL, BigQuery 관련 서적을 갖추고 있으며, 실제로 Firestore(실시간 동기화) + Neo4j(소셜 그래프) + MySQL(결제)을 목적에 따라 분리해 설계했습니다.
+- **프레임워크 세대 변화를 건너뛰지 않고 따라갑니다.** AngularJS → React·React Native(1·2판) → Svelte/Sapper 순으로 학습해 왔고, 2025년 Svelte 5의 룬(Runes)을 실무 MVP에 적용했습니다.
+- **팀과 일정, 리스크를 관리 대상으로 봅니다.** 맨먼스 미신, Slack·리스크 관리(Tom DeMarco), Team Geek 등을 읽었고, 개발리드·개발총괄로서 데일리 스크럼·스프린트 도입과 코드 리뷰 문화 정착에 반영했습니다.
+- **UI를 함께 다루는 영역으로 인식합니다.** Simple and Usable, 드로잉·공간 배치 서적을 통해 시각 감각을 기르며, WidgetBook을 활용한 디자이너와의 시안 구현 협업으로 이어졌습니다.
+- **원문을 직접 읽고 씁니다.** Grammar in Use, English for Developers 등으로 영어를 다지며, RemoteMonster에서 영문 SDK 레퍼런스 문서와 가이드를 직접 작성했습니다.
+
 ## 수상/자격증/기타
 
 - Product of the Day - Product Hunt — https://www.producthunt.com/products/effy
@@ -329,3 +343,4 @@ Python, AWS, Git, iOS, HTML, JavaScript, MySQL, SQL, C / C++, GitHub, Flutter, S
 ## 링크
 
 - https://medium.com/@sk3767
+- https://iam.hyounsik.com
