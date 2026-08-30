@@ -1,7 +1,7 @@
-# hyounsik.info 개발 가이드
+# iam.hyounsik.com 개발 가이드
 
 ## 개요
-개인 포트폴리오 사이트(https://hyounsik.info). Next.js(App Router)를 정적 export(`output: 'export'`)로 빌드해 Firebase Hosting에 배포한다. 서버 사이드 렌더링(SSR)은 사용하지 않으며, 모든 페이지는 빌드 시점에 정적 HTML로 생성된다.
+개인 포트폴리오 사이트(https://iam.hyounsik.com). Next.js(App Router)를 정적 export(`output: 'export'`)로 빌드해 Firebase Hosting에 배포한다. 서버 사이드 렌더링(SSR)은 사용하지 않으며, 모든 페이지는 빌드 시점에 정적 HTML로 생성된다.
 
 ## 요구 사항
 - Node.js 20.19+/22.13+ 권장 (현재 로컬 Node v22.12는 일부 devDependency의 `engines` 범위를 살짝 벗어나지만 빌드/실행에는 지장 없음)
@@ -39,7 +39,8 @@ npm run preview   # serve out — build 이후에 실행
    find out -name "*.html" | sort
    ```
 2. `npm run lint` — ESLint(`eslint-config-next`) 검사
-3. `npm run dev` 또는 `npm run preview`로 브라우저에서 데스크톱/모바일 반응형 레이아웃과 원격 이미지(`image.hyounsik.info`) 로딩 확인
+3. `npm run dev` 또는 `npm run preview`로 브라우저에서 데스크톱/모바일 반응형 레이아웃과 이미지·영상 로딩 확인
+4. `npm run check-images` — 코드가 참조하는 이미지·영상이 실제로 있는지, 원본 없는 잔재가 남았는지 검사
 
 ## 배포 (Deploy)
 
@@ -74,7 +75,14 @@ components/
 lib/
   careers.ts   # 경력 데이터(CareerEntry[])와 slug 조회 함수 getCareer() — 콘텐츠 소스 오브 트루스
 
-public/        # 정적 자산 (파비콘 외 대부분의 이미지는 image.hyounsik.info CDN에서 로드)
+public/images/ # 이미지·영상. datas/에서 자동 동기화된다 (직접 편집하지 말 것)
+app/icon.png        # 파비콘 — datas/hyounsik.png에서 자동 생성
+app/apple-icon.png  # 애플 터치 아이콘 — 위와 동일
+
+scripts/
+  sync-images.mjs  # datas/ → public/images/ 동기화 + 참조 검사
+  make-icons.mjs   # hyounsik.png → 파비콘·애플 아이콘 생성
+  md2pdf.py        # 마크다운 이력서 → PDF
 
 next.config.mjs      # output: 'export', images.unoptimized: true
 tailwind.config.ts    # Tailwind 테마(색상, 폰트)

@@ -1,5 +1,5 @@
 export const site = {
-  url: 'https://hyounsik.info',
+  url: 'https://iam.hyounsik.com',
   name: '이현식',
   nameEn: 'Hyoun Sik Lee',
   role: 'Flutter · iOS · Server Developer',

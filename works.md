@@ -1,7 +1,7 @@
 # 프로젝트 개요 및 작업 내용
 
 ## 목적
-이현식의 **포트폴리오 겸 개인 홈페이지** (https://hyounsik.info).
+이현식의 **포트폴리오 겸 개인 홈페이지** (https://iam.hyounsik.com).
 
 - Next.js (App Router) + TypeScript + Tailwind CSS v4 + HeroUI v3
 - `output: 'export'`로 정적 export 후 Firebase Hosting에 배포 (SSR 미사용)
@@ -21,15 +21,24 @@
 - `datas/`는 배포 산출물(`out/`)에 포함되지 않는다.
 
 ## 미디어 자산 상태
-- 25/26년 작업(드라마 리믹스, AI 캐릭터챗, Soonshot, AI 챗봇, Crispy Lit)은 실제 이미지가 없어 **더미 사용 중**
-- 더미 이미지: `public/placeholder/shot-1~6.svg`
-- 더미 영상: YouTube embed 더미 링크
-- `lib/projects.ts`의 `Media.placeholder: true` 플래그로 교체 필요 자산을 표시
+- 대부분 실제 스크린샷으로 교체 완료. `lib/projects.ts`의 `Media.placeholder: true` 플래그가 남은 교체 대상을 표시한다 (`grep "true)" lib/projects.ts`)
+- 교체 필요: `ai-chatbot-client`(crushpop 3장 — 원본 359×780로 저해상도), `outsourcing-flutter`(effy 이미지 대용)
+- 자산 파이프라인: `datas/<회사>/` → `npm run sync-images` → `public/images/<회사>/` (폭 1200 초과 시 자동 리사이즈)
+- **`public/images/`를 직접 편집하지 말 것.** 원본은 항상 `datas/`에 두고 스크립트가 동기화한다
+- `npm run check-images`로 ① 참조하는데 없는 파일 ② 원본 없는 잔재를 검사한다. 참조 누락은 빌드를 중단시킨다
 - 영상 반영 현황: Effy Live(`youtu.be/fvDae0-39jE`), Crispy Lit(`youtu.be/MBbKiUsjyF0`)는 YouTube 임베드
 - KOKIRI는 YouTube 영상이 재생 불가(UNPLAYABLE)여서 **직접 호스팅**으로 전환 — `public/images/kokiri/kokiri_intro.mp4`를 `<video>`로 재생
 - 영상 종류는 `Media.kind`로 구분: `youtube`(iframe) / `video`(로컬 파일, `clip()` 헬퍼)
 - 로컬 영상은 `lib/*.ts`가 참조하는 파일만 `datas/` → `public/`으로 동기화된다 (화면녹화 원본이 수백 MB라 전체 복사 금지)
-- 연락처(`lib/site.ts`의 `contact`)는 **더미 데이터** — 실제 정보로 교체 필요
+- 연락처(`lib/site.ts`의 `contact`)는 실제 정보 반영 완료 (이메일·GitHub·Medium)
+
+## 도메인 · 공유 메타
+- 실제 서비스 주소는 **https://iam.hyounsik.com** (`lib/site.ts`의 `url`). Firebase 사이트는 `iam-hyounsik`
+- `url`은 `metadataBase`로 쓰여 **og:image의 절대 URL을 만든다**. 도메인이 틀리면 링크 공유 미리보기 이미지가 깨진다
+- OG 이미지는 `datas/hyounsik.png` → `public/images/hyounsik.png`(1200×1200)
+- 같은 원본에서 `app/icon.png`(512)·`app/apple-icon.png`(180)이 `npm run make-icons`로 생성된다
+- 이전에는 `og:image`가 없어서 스크래퍼가 페이지 첫 이미지(Soonshot 로고)를 임의로 가져갔다
+- 배포 후 미리보기가 안 바뀌면 카카오/페이스북 공유 디버거로 캐시를 갱신해야 한다
 
 ## 기술 스택 결정
 | 항목 | 선택 | 비고 |

@@ -1,8 +1,8 @@
-# hyounsik.info
+# iam.hyounsik.com
 
 이현식의 포트폴리오 겸 개인 홈페이지.
 
-- **URL**: https://hyounsik.info
+- **URL**: https://iam.hyounsik.com
 - **Stack**: Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · HeroUI v3
 - **Hosting**: Firebase Hosting (정적 export, SSR 없음)
 - **Design reference**: https://spencergabor.work

@@ -6,6 +6,17 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' });
 
+/**
+ * 링크 공유(카카오톡·슬랙·트위터 등)에 쓰이는 대표 이미지.
+ * 지정하지 않으면 스크래퍼가 페이지의 첫 이미지를 임의로 골라 간다.
+ */
+const ogImage = {
+  url: '/images/hyounsik.png',
+  width: 1200,
+  height: 1200,
+  alt: `${site.name} · ${site.role}`,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -17,7 +28,16 @@ export const metadata: Metadata = {
     title: `${site.name} · ${site.role}`,
     description: site.intro[0],
     url: site.url,
+    siteName: `${site.name} · Portfolio`,
+    locale: 'ko_KR',
     type: 'website',
+    images: [ogImage],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${site.name} · ${site.role}`,
+    description: site.intro[0],
+    images: [ogImage.url],
   },
 };
 
