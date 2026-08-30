@@ -50,6 +50,16 @@
 | `npm run deploy` | build + `firebase deploy --only hosting` |
 | `npm run deploy:ci` | `.cert/firebase-service-account.json` 서비스 계정으로 비대화식 배포 |
 
+## VSCode 디버그 구성
+`.vscode/launch.json` — 런타임 서버가 없는 정적 사이트이므로 Node가 도는 지점은 dev 서버와 빌드 시점 둘뿐이다.
+
+| 구성 | 용도 |
+| --- | --- |
+| dev 서버 (로컬 개발) | `next dev` 실행. 준비되면 Chrome 자동 연결 |
+| 브라우저 디버그 (Chrome, :3000) | 이미 뜬 dev 서버에 디버거만 부착 |
+| 정적 export 빌드 디버그 | `generateStaticParams`·서버 컴포넌트가 실행되는 유일한 지점 |
+| out/ 배포 미리보기 | Firebase 에뮬레이터로 실제 배포물 검증 |
+
 ## 인증 정보
 - `.cert/` 폴더에 Firebase 서비스 계정 키 등 배포 인증 정보를 둔다.
 - `.cert/`는 `.gitignore`에 포함되어 **커밋되지 않는다** (인증 정보 유출 방지).
@@ -101,6 +111,25 @@ datas/                # 원본 자료
 - [x] `.gitignore` 정비 — `.cert/` 커밋 제외 명시
 - [x] README 정비
 - [x] 데이터 레이어 구성 — `lib/site.ts`, `lib/projects.ts` (hyounsik.md 기준)
+- [x] `.vscode/launch.json` 디버그 구성 추가
+- [x] **로컬 동작 검증 완료** (2026-08-27) — `npm run build` 17페이지 정적 생성 / `out/` HTML 16개, `npm run dev` Ready 180ms, `/` 및 `/projects/[slug]` 200 응답
 - [ ] spencergabor 레퍼런스 기반 디자인 정교화 (타이포 스케일, 스크롤 인터랙션, 카드 스택)
 - [ ] 실제 스크린샷/영상으로 더미 자산 교체 (`datas/` 정리 후)
 - [ ] 실제 연락처로 더미 연락처 교체
+- [ ] `next dev`가 자동 생성한 `AGENTS.md`/`CLAUDE.md` 유지 여부 결정 (`agentRules: false`로 비활성 가능)
+
+## 트러블슈팅 기록
+
+**npm install이 무한 대기 / V8 OOM으로 크래시**
+- 증상: `npm install`이 출력 없이 14분 이상 멈춤. 이전 시도는 V8 heap OOM으로 죽음. `--loglevel=http`로 보니 `registry.npmjs.org/typescript`를 수천 번 반복 조회 중이었다.
+- 원인: `package.json`의 `typescript@5.9.4`가 **존재하지 않는 버전**. npm이 매칭 버전을 찾으려 metadata 재조회 루프에 빠졌다.
+- 해결: `typescript@5.9.3`으로 수정 → 481 패키지 10초에 설치 완료.
+- 교훈: 의존성 버전을 핀할 때 `npm view <pkg>@<ver> version`으로 존재 여부를 먼저 확인한다.
+
+**정적 export 시 `/icon` 라우트 빌드 실패**
+- 증상: `Error: export const dynamic = "force-static" ... not configured on route "/icon" with "output: export"`
+- 해결: `app/icon.tsx`에 `export const dynamic = 'force-static'` 추가.
+
+**Turbopack이 상위 디렉터리를 루트로 오인**
+- 증상: `/Users/radish/workspace`의 `package-lock.json`을 감지해 경고 발생.
+- 해결: `next.config.mjs`에 `turbopack.root`를 프로젝트 디렉터리로 고정.

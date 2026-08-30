@@ -1,11 +1,14 @@
-import Image from 'next/image';
 import { site } from '@/lib/site';
 import { featuredProjects, moreProjects } from '@/lib/projects';
 import { ProjectCard } from '@/components/project-card';
+import { ImageStack } from '@/components/image-stack';
 import { ContactSection } from '@/components/contact-section';
 
 export default function HomePage() {
-  const heroCards = featuredProjects.slice(0, 4);
+  const heroCards = featuredProjects.slice(0, 4).map((project) => {
+    const cover = project.media.find((item) => item.kind === 'image') ?? project.media[0];
+    return { src: cover.src, alt: cover.alt };
+  });
 
   return (
     <>
@@ -20,26 +23,7 @@ export default function HomePage() {
 
         <h1 className="display-hero mt-24 [font-size:13vw]">{site.nameEn}</h1>
 
-        <div className="mx-auto mt-6 flex max-w-3xl items-center justify-center">
-          {heroCards.map((project, index) => {
-            const cover = project.media.find((item) => item.kind === 'image') ?? project.media[0];
-            const tilt = ['-rotate-6', 'rotate-3', '-rotate-3', 'rotate-6'][index];
-            return (
-              <div
-                key={project.slug}
-                className={`${tilt} ${index > 0 ? '-ml-8' : ''} w-1/4 overflow-hidden rounded-2xl shadow-xl shadow-black/10`}
-              >
-                <Image
-                  src={cover.src}
-                  alt={cover.alt}
-                  width={800}
-                  height={600}
-                  className="aspect-square w-full object-cover"
-                />
-              </div>
-            );
-          })}
-        </div>
+        <ImageStack items={heroCards} size="lg" className="mx-auto mt-[5vw] max-w-3xl" />
 
         <p className="display-hero mt-10 text-mute [font-size:8vw]">
           Flutter, iOS

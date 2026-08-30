@@ -1,10 +1,18 @@
 {
   "hosting": {
+    "site": "iam-hyounsik",
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
     "trailingSlash": false,
     "headers": [
+      {
+        "_comment": "같은 헤더 키가 여러 규칙에 걸리면 뒤쪽 규칙이 이깁니다(last-match-wins). 따라서 catch-all을 먼저 두고, 캐시를 오래 두어야 하는 규칙을 뒤에 둡니다.",
+        "source": "**",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        ]
+      },
       {
         "source": "**/*.@(jpg|jpeg|png|svg|webp|avif|mp4|webm)",
         "headers": [
@@ -21,7 +29,7 @@
     ]
   },
   "emulators": {
-    "hosting": { "port": 5000 },
+    "hosting": { "port": 5050 },
     "ui": { "enabled": false }
   }
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { projects, getProject } from '@/lib/projects';
+import { ImageStack } from '@/components/image-stack';
 import { ContactSection } from '@/components/contact-section';
 
 export function generateStaticParams() {
@@ -31,6 +32,9 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
+
+  const videos = project.media.filter((item) => item.kind === 'video');
+  const images = project.media.filter((item) => item.kind === 'image');
 
   return (
     <>
@@ -86,28 +90,38 @@ export default async function ProjectPage({
         )}
 
         <div className="mt-16 space-y-10">
-          {project.media.map((item) =>
-            item.kind === 'video' ? (
-              <div key={item.src} className="overflow-hidden rounded-3xl bg-shell">
-                <iframe
-                  src={item.src}
-                  title={item.alt}
-                  allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                  className="aspect-video w-full"
-                />
-              </div>
-            ) : (
-              <Image
-                key={item.src}
+          {videos.map((item) => (
+            <div key={item.src} className="overflow-hidden rounded-3xl bg-shell">
+              <iframe
                 src={item.src}
-                alt={item.alt}
-                width={1200}
-                height={900}
-                className="w-full rounded-3xl bg-shell object-cover"
+                title={item.alt}
+                allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                allowFullScreen
+                className="aspect-video w-full"
               />
-            ),
-          )}
+            </div>
+          ))}
+
+          {images.length > 0 &&
+            (project.mediaLayout === 'stack' ? (
+              <ImageStack
+                items={images}
+                size={project.mediaStackSize ?? 'md'}
+                square={false}
+                className="py-6"
+              />
+            ) : (
+              images.map((item) => (
+                <Image
+                  key={item.src}
+                  src={item.src}
+                  alt={item.alt}
+                  width={1200}
+                  height={900}
+                  className="w-full rounded-3xl bg-shell object-cover"
+                />
+              ))
+            ))}
         </div>
       </div>
 
