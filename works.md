@@ -82,7 +82,7 @@ app/
   layout.tsx                # 폰트(Inter, Oswald), 메타데이터
   page.tsx                  # 홈 — Hero / Featured Work / More Work / Contact
   projects/[slug]/page.tsx  # 프로젝트 상세 (generateStaticParams 정적 생성)
-  icon.tsx / not-found.tsx
+  icon.png / apple-icon.png / not-found.tsx
   globals.css               # HeroUI 스타일 import + @theme 토큰 + .display-hero
 
 components/
@@ -90,10 +90,10 @@ components/
   contact-section.tsx  # 하단 대형 CONTACT 섹션
 
 lib/
-  site.ts       # 프로필, 연락처(더미), 회사 목록, 스킬, 학력
+  site.ts       # 프로필, 연락처, 히어로 이미지, 회사 목록, 스킬, 학력
   projects.ts   # Project[] — 프로젝트 데이터 및 featured/more 분류
 
-public/placeholder/   # 더미 이미지 (SVG)
+public/images/         # 이미지·영상 (datas/에서 자동 동기화)
 datas/                # 원본 자료
 ```
 
@@ -124,9 +124,19 @@ datas/                # 원본 자료
 - [x] 데이터 레이어 구성 — `lib/site.ts`, `lib/projects.ts` (hyounsik.md 기준)
 - [x] `.vscode/launch.json` 디버그 구성 추가
 - [x] **로컬 동작 검증 완료** (2026-08-27) — `npm run build` 17페이지 정적 생성 / `out/` HTML 16개, `npm run dev` Ready 180ms, `/` 및 `/projects/[slug]` 200 응답
+- [x] 실제 연락처 반영 (이메일·GitHub·Medium)
+- [x] 이미지·영상 자산 파이프라인 구축 (`sync-images`, `check-images`)
+- [x] 실제 스크린샷으로 자산 교체 (일부 저해상도 항목 제외)
+- [x] KOKIRI 영상을 직접 호스팅(`<video>` 자동재생)으로 전환
+- [x] 도메인 확정(`iam.hyounsik.com`) 및 OG 메타·파비콘 적용
+- [x] **실제 배포 완료** (2026-09-29) — https://iam.hyounsik.com. sitemap 13 URL·robots·OG·canonical 라이브 검증, 영상 Range 요청 206 확인
+- [x] SEO 기반 구축 — `app/sitemap.ts`, `app/robots.ts`, 페이지별 canonical·og:url
+- [x] Google Search Console 도메인 속성 등록 (Firebase 커스텀 도메인 연결 시의 소유권 확인이 승계되어 자동 인증)
+- [x] Search Console에 sitemap 제출 완료 (2026-09-29)
+- [ ] 색인 현황 확인 — 제출 후 며칠 뒤 '페이지' 리포트에서 13개 URL 색인 여부 점검
 - [ ] spencergabor 레퍼런스 기반 디자인 정교화 (타이포 스케일, 스크롤 인터랙션, 카드 스택)
-- [ ] 실제 스크린샷/영상으로 더미 자산 교체 (`datas/` 정리 후)
-- [ ] 실제 연락처로 더미 연락처 교체
+- [ ] 저해상도 자산 교체 — `ai-chatbot-client`, `outsourcing-flutter`
+- [ ] 링크 공유 미리보기 확인 (카카오 디버거로 캐시 갱신 필요할 수 있음)
 - [ ] `next dev`가 자동 생성한 `AGENTS.md`/`CLAUDE.md` 유지 여부 결정 (`agentRules: false`로 비활성 가능)
 
 ## 트러블슈팅 기록

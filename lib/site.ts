@@ -1,5 +1,12 @@
 export const site = {
   url: 'https://iam.hyounsik.com',
+  /**
+   * Google Search Console 소유권 확인 코드.
+   * Search Console → 속성 추가 → URL 접두어 → 'HTML 태그' 방식에서
+   * <meta name="google-site-verification" content="여기값"> 의 content만 넣는다.
+   * 비워 두면 meta 태그가 출력되지 않는다.
+   */
+  googleSiteVerification: '',
   name: '이현식',
   nameEn: 'Hyoun Sik Lee',
   role: 'Flutter · iOS · Server Developer',

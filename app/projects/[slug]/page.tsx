@@ -18,9 +18,23 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+
+  const path = `/projects/${slug}`;
+  // 상세 페이지의 대표 이미지 — 없으면 레이아웃의 기본 OG 이미지를 쓴다
+  const cover = project.media.find((item) => item.kind === 'image');
+
   return {
     title: `${project.title} · ${project.company}`,
     description: project.summary,
+    // canonical과 og:url을 페이지별로 지정하지 않으면 모든 페이지가 홈을 가리켜 색인에서 중복 처리된다
+    alternates: { canonical: path },
+    openGraph: {
+      title: `${project.title} · ${project.company}`,
+      description: project.summary,
+      url: path,
+      type: 'article',
+      ...(cover ? { images: [{ url: cover.src, alt: cover.alt }] } : {}),
+    },
   };
 }
 

@@ -125,6 +125,7 @@ export const projects: Project[] = [
     media: [
       shot('adg/soonshot_ai.png', 'AI챗 캐릭터 화면'),
       shot('adg/soonshot_ai_chat.png', 'AI 캐릭터챗 대화 화면'),
+      shot('adg/ai_chat_stat.png', '캐릭터챗 관리자 지표 대시보드 — 드라마·회차·캐릭터별 대화 통계'),
     ],
   },
   {

@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.intro[0],
+  alternates: { canonical: '/' },
   openGraph: {
     title: `${site.name} · ${site.role}`,
     description: site.intro[0],
@@ -39,6 +40,15 @@ export const metadata: Metadata = {
     description: site.intro[0],
     images: [ogImage.url],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
+  // Search Console 소유권 확인용. 값이 있을 때만 meta 태그가 나간다
+  ...(site.googleSiteVerification
+    ? { verification: { google: site.googleSiteVerification } }
+    : {}),
 };
 
 export default function RootLayout({
