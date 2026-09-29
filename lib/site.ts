@@ -7,6 +7,13 @@ export const site = {
    * 비워 두면 meta 태그가 출력되지 않는다.
    */
   googleSiteVerification: '',
+  /**
+   * 검색엔진 색인 허용 여부.
+   *   false — 모든 페이지에 noindex가 붙어 검색 결과에 나오지 않는다 (현재 설정)
+   *   true  — 정상 색인. 켤 때는 Search Console 속성을 다시 등록하고 사이트맵을 제출한다
+   * 값을 바꾼 뒤 재배포해야 실제로 반영된다.
+   */
+  searchIndexing: false as boolean,
   name: '이현식',
   nameEn: 'Hyoun Sik Lee',
   role: 'Flutter · iOS · Server Developer',

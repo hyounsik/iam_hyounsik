@@ -40,11 +40,24 @@ export const metadata: Metadata = {
     description: site.intro[0],
     images: [ogImage.url],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
-  },
+  /**
+   * 색인 여부는 lib/site.ts의 searchIndexing 하나로 제어한다.
+   * 레이아웃에 있으므로 모든 페이지에 적용된다.
+   *
+   * 차단할 때도 robots.txt의 크롤링은 계속 허용해야 한다 — 크롤링을 막으면
+   * 크롤러가 이 태그를 읽지 못해, 이미 색인된 URL이 오히려 그대로 남는다.
+   */
+  robots: site.searchIndexing
+    ? {
+        index: true,
+        follow: true,
+        googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+      }
+    : {
+        index: false,
+        follow: false,
+        googleBot: { index: false, follow: false },
+      },
   // Search Console 소유권 확인용. 값이 있을 때만 meta 태그가 나간다
   ...(site.googleSiteVerification
     ? { verification: { google: site.googleSiteVerification } }
